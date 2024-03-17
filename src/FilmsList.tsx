@@ -10,8 +10,8 @@ export default function FilmsList(props: FilmsListProps) {
   const { films } = props;
   return (
     <div className="catalog__films-list">
-      {films.map((film) =>
-        <article className="small-film-card catalog__films-card">
+      {films.map((film) => (
+        <article key={film.id} className="small-film-card catalog__films-card">
           <FilmCard
             key={film.id}
             name={film.name}
@@ -19,7 +19,7 @@ export default function FilmsList(props: FilmsListProps) {
             imageAlt={film.name}
           />
         </article>
-      )}
+      ))}
     </div>
   );
 }
