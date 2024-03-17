@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Film() {
+export default function Film() {
   return (
     <>
       <section className="film-card film-card--full">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MyList() {
+export default function MyList() {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function SignIn() {
+export default function SignIn() {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Player() {
+export default function Player() {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg" />

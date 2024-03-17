@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AddReview() {
+export default function AddReview() {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

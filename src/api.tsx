@@ -6,7 +6,7 @@ export type Film = {
   genre: string;
 };
 
-const filmsJSON = [
+const filmsJSON: unknown = [
   {
     id: 'c2e76d54-5ca0-4a00-bafe-93dbe6c17df8',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
@@ -234,4 +234,4 @@ const filmsJSON = [
   },
 ];
 
-export const films: Film[] = JSON.parse(JSON.stringify(filmsJSON));
+export const films: Film[] = JSON.parse(JSON.stringify(filmsJSON)) as Film[];
