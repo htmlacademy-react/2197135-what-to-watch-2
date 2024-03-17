@@ -11,14 +11,14 @@ export default function FilmsList(props: FilmsListProps) {
   return (
     <div className="catalog__films-list">
       {films.map((film) =>
-          <article className="small-film-card catalog__films-card">
-            <FilmCard
-              key={film.id}
-              name={film.name}
-              imageSrc={film.previewImage}
-              imageAlt={film.name}
-            />
-          </article>
+        <article className="small-film-card catalog__films-card">
+          <FilmCard
+            key={film.id}
+            name={film.name}
+            imageSrc={film.previewImage}
+            imageAlt={film.name}
+          />
+        </article>
       )}
     </div>
   );
