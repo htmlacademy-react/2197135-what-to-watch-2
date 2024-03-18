@@ -1,20 +1,19 @@
-import React from 'react';
-import FilmCard from './FilmCard';
-import { Film } from './api';
+import FilmCard from '../film-card/film-card';
+import { Film } from '../../types/film';
 
 type FilmsListProps = {
   films: Film[];
 };
 
-export default function FilmsList(props: FilmsListProps) {
-  const { films } = props;
+export default function FilmsList({films}: FilmsListProps): JSX.Element {
+
   return (
     <div className="catalog__films-list">
       {films.map((film) => (
         <article key={film.id} className="small-film-card catalog__films-card">
           <FilmCard
             key={film.id}
-            name={film.name}
+            filmName={film.name}
             imageSrc={film.previewImage}
             imageAlt={film.name}
           />

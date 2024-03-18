@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function AddReview() {
   return (
     <section className="film-card film-card--full">

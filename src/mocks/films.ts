@@ -1,12 +1,6 @@
-export type Film = {
-  id: string;
-  name: string;
-  previewImage: string;
-  previewVideoLink: string;
-  genre: string;
-};
+import { Film } from "../types/film";
 
-const filmsJSON: unknown = [
+export const films: Film[] = [
   {
     id: 'c2e76d54-5ca0-4a00-bafe-93dbe6c17df8',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
@@ -233,5 +227,3 @@ const filmsJSON: unknown = [
     genre: 'Crime',
   },
 ];
-
-export const films: Film[] = JSON.parse(JSON.stringify(filmsJSON)) as Film[];

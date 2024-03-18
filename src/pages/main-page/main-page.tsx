@@ -1,15 +1,12 @@
-import React from 'react';
+import FilmsList from '../../components/films-list/films-list';
 
-import FilmsList from '../FilmsList';
-
-import { Film } from '../api';
+import { Film } from '../../types/film';
 
 type MainPageProps = {
   films: Film[];
 };
 
-export default function MainPage(props: MainPageProps) {
-  const { films } = props;
+export default function MainPage({films}: MainPageProps): JSX.Element {
 
   return (
     <>
