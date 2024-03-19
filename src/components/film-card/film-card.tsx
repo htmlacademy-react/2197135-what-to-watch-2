@@ -4,6 +4,7 @@ type FilmCardProps = {
   imageAlt: string;
 };
 
+
 export default function FilmCard({filmName, imageSrc, imageAlt}: FilmCardProps) {
   return (
     <>

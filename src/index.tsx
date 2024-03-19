@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import App from './pages/main-page/main-page';
+import App from './components/app/app';
 
 import {films} from './mocks/films';
 
