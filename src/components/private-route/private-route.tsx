@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute, LoginStatus } from '../../utils/const';
+import { AppRoute, LoginStatus } from '@/utils/const';
 
 type PrivateRouteProps = {
   loginStatus: LoginStatus;
