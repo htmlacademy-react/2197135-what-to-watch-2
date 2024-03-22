@@ -1,7 +1,14 @@
+import { Helmet } from 'react-helmet-async';
+
+import Logo from '@/components/logo/logo';
+
 export default function Film() {
   return (
     <>
       <section className="film-card film-card--full">
+        <Helmet>
+          <title>What to whatch. Whatch your film</title>
+        </Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img
@@ -11,13 +18,7 @@ export default function Film() {
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo />
             <ul className="user-block">
               <li className="user-block__item">
                 <div className="user-block__avatar">
@@ -115,9 +116,9 @@ export default function Film() {
                 <p>
                   Gustave prides himself on providing first-class service to the
                   hotels guests, including satisfying the sexual needs of the
-                  many elderly women who stay there. When one of Gustaves
-                  lovers dies mysteriously, Gustave finds himself the recipient
-                  of a priceless painting and the chief suspect in her murder.
+                  many elderly women who stay there. When one of Gustaves lovers
+                  dies mysteriously, Gustave finds himself the recipient of a
+                  priceless painting and the chief suspect in her murder.
                 </p>
                 <p className="film-card__director">
                   <strong>Director: Wes Anderson</strong>
@@ -200,13 +201,7 @@ export default function Film() {
           </div>
         </section>
         <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>

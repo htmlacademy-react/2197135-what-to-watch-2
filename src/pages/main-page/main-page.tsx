@@ -1,15 +1,20 @@
-import FilmsList from '../../components/films-list/films-list';
+import { Helmet } from 'react-helmet-async';
 
-import { Film } from '../../types/film';
+import FilmsList from '@/components/films-list/films-list';
+import Logo from '@/components/logo/logo';
+
+import { Film } from '@/types/film';
 
 type MainPageProps = {
   films: Film[];
 };
 
-export default function MainPage({films}: MainPageProps): JSX.Element {
-
+export default function MainPage({ films }: MainPageProps): JSX.Element {
   return (
     <>
+      <Helmet>
+        <title>What to whatch. Main page</title>
+      </Helmet>
       <section className="film-card">
         <div className="film-card__bg">
           <img
@@ -19,13 +24,7 @@ export default function MainPage({films}: MainPageProps): JSX.Element {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
@@ -146,13 +145,7 @@ export default function MainPage({films}: MainPageProps): JSX.Element {
           </div>
         </section>
         <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
