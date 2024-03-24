@@ -4,4 +4,11 @@ export type Film = {
   previewImage: string;
   previewVideoLink: string;
   genre: string;
+  year: number;
+  rating: number;
+  ratingLevel: string;
+  ratingCount: number;
+  director: string;
+  actors: string[];
+  description: string;
 };
