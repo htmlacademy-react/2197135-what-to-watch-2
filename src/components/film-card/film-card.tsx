@@ -1,26 +1,41 @@
+import { AppRoute } from '@/utils/const';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 type FilmCardProps = {
+  id: string;
   filmName: string;
   imageSrc: string;
   imageAlt: string;
 };
 
+export default function FilmCard({
+  id,
+  filmName,
+  imageSrc,
+  imageAlt,
+}: FilmCardProps) {
 
-export default function FilmCard({filmName, imageSrc, imageAlt}: FilmCardProps) {
+  const [isActive, setIsActive] = useState(false);
+
+  function onCardActive() {
+    setIsActive(true);
+  }
+
+  function onCardInActive() {
+    setIsActive(false);
+  }
+
   return (
-    <>
+    <div key={id} onMouseEnter={onCardActive} onMouseLeave={onCardInActive} >
       <div className="small-film-card__image">
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          width={280}
-          height={175}
-        />
+        {!isActive ? <img src={imageSrc} alt={imageAlt} width={280} height={175} /> : null}
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
+        <Link to={`${AppRoute.Film}${id}`} className="small-film-card__link">
           {filmName}
-        </a>
+        </Link>
       </h3>
-    </>
+    </div>
   );
 }
