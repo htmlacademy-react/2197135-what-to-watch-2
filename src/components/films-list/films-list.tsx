@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 import FilmCard from '../film-card/film-card';
 import { Film } from '../../types/film';
@@ -18,10 +18,10 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
       {films.map(({id, name, previewImage,}) => (
         <article key={id}
           className="small-film-card catalog__films-card"
-          onClick={()=> navigate(`${AppRoute.Film + id}`)}
+          onClick={()=> navigate(`${AppRoute.Film}${id}`)}
         >
           <FilmCard
-            key={id}
+            id={id}
             filmName={name}
             imageSrc={previewImage}
             imageAlt={name}
