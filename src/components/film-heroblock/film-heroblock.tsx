@@ -45,7 +45,7 @@ export default function FilmHeroblock({id, filmImage, filmName, filmGenre, filmY
               <span>My list</span>
               <span className="film-card__count">9</span>
             </button>
-            <Link to={AppRoute.AddReview + id + '/review'} className="btn film-card__button">Add review</Link>
+            <Link to={`${AppRoute.AddReview + id }/review`} className="btn film-card__button">Add review</Link>
           </div>
         </div>
       </div>
