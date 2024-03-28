@@ -7,7 +7,7 @@ import Header from '@/components/header/header';
 import { Film } from '@/types/types';
 
 type MyListProps = {
-  myFilms: Film[]
+  myFilms: Film[];
 };
 
 export default function MyList({myFilms}: MyListProps): JSX.Element {
