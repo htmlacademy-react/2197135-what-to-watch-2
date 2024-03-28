@@ -4,10 +4,14 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/logo/logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
-import { Film as FilmType } from '@/types/film';
+import {FilmDetails, Film as FilmType } from '@/types/types';
+import { FilmInfo as FilmInfoType } from '@/types/types';
 import Page404 from '../page-404/page-404';
-import FilmOverview from '@/components/film-overview/film-overview';
 import FilmsList from '@/components/films-list/films-list';
+import FilmDetailsComponent from '@/components/film-details/film-details';
+import FilmInfo from '@/components/film-info/film-info';
+import UserReviews from '@/components/user-reviews/user-reviews';
+
 
 type FilmProps = {
   films: FilmType[];
@@ -20,63 +24,40 @@ type Params = {
 
 export default function Film({ films, myFilms }: FilmProps): JSX.Element {
   const { id } = useParams<Params>();
+
+  if (!id) {
+    return <Page404 />;
+  }
   const film = films.find((item) => item.id === id);
 
   if (!film) {
     return <Page404 />;
+
   }
+
+  const {director, previewImage, genre, year, name, reviews, actors, duration, description, ratingLevel, rating, ratingCount} = film;
+
+  const filmDetails: FilmDetails = {director, genre, year, actors, duration};
+
+  const filmInfo: FilmInfoType = {name, id, previewImage, rating, ratingLevel, ratingCount, description, actors, director};
 
   return (
     <>
-      <section key={id} className="film-card film-card--full">
+      <section className="film-card film-card--full">
         <Helmet>
           <title>What to whatch. Whatch your film</title>
         </Helmet>
         <FilmHeroblock
-          filmImage={film.previewImage}
-          filmName={film.name}
-          filmGenre={film.genre}
-          filmYear={film.year}
-          id={film.id}
+          image={previewImage}
+          name={name}
+          genre={genre}
+          year={year}
+          id={id}
         />
         <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img
-                src={film.previewImage}
-                alt={film.name}
-                width={218}
-                height={327}
-              />
-            </div>
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">
-                      Details
-                    </a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">
-                      Reviews
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              <FilmOverview
-                filmRating={film.rating}
-                filmActors={film.actors}
-                filmDescription={film.description}
-                filmDirector={film.director}
-                filmRatingCount={film.ratingCount}
-                filmRatingLevel={film.ratingLevel}
-              />
-            </div>
-          </div>
+          <FilmInfo filmInfo={filmInfo} />
+          <FilmDetailsComponent filmDetails={filmDetails} />
+          <UserReviews reviews={reviews} />
         </div>
       </section>
       <div className="page-content">
@@ -91,3 +72,4 @@ export default function Film({ films, myFilms }: FilmProps): JSX.Element {
     </>
   );
 }
+

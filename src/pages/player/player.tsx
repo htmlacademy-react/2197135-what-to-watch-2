@@ -1,4 +1,4 @@
-import { Film } from '@/types/film';
+import { Film } from '@/types/types';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Page404 from '../page-404/page-404';
@@ -12,7 +12,6 @@ type Params = {
   id: string;
 }
 
-
 export default function Player({films}:PlayerProps): JSX.Element {
   const navigate = useNavigate();
 
@@ -23,7 +22,6 @@ export default function Player({films}:PlayerProps): JSX.Element {
   if(!chosenFilm) {
     return <Page404 />;
   }
-
 
   return (
     <div className="player">

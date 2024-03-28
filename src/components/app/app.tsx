@@ -11,7 +11,7 @@ import SignIn from '@/pages/sign-in/sign-in';
 import Page404 from '@/pages/page-404/page-404';
 
 import { AppRoute, LoginStatus } from '@/utils/const';
-import { Film as FilmType } from '@/types/film';
+import { Film as FilmType } from '@/types/types';
 
 
 type AppProps = {
@@ -35,16 +35,16 @@ export default function App({films, myFilms}: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={`${AppRoute.Film}:id`} element={<Film films={films} myFilms={myFilms}/>} />
+          <Route path={AppRoute.Film} element={<Film films={films} myFilms={myFilms}/>} />
           <Route
-            path={`${AppRoute.AddReview}:id/review`}
+            path={AppRoute.AddReview}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
                 <AddReview films={films} />
               </PrivateRoute>
             }
           />
-          <Route path={`${AppRoute.Player}:id`} element={<Player films={films}/>} />
+          <Route path={AppRoute.Player} element={<Player films={films}/>} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

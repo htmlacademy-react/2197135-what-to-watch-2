@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/logo/logo';
 import FilmsList from '@/components/films-list/films-list';
-import { Film } from '@/types/film';
+import { Film } from '@/types/types';
 
 type MyListProps = {
   myFilms: Film[];

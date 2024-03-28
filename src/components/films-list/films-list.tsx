@@ -1,8 +1,6 @@
-import { useNavigate} from 'react-router-dom';
-
 import FilmCard from '../film-card/film-card';
-import { Film } from '../../types/film';
-import { AppRoute } from '@/utils/const';
+import { Film } from '../../types/types';
+import { useState } from 'react';
 
 type FilmsListProps = {
   films: Film[];
@@ -10,23 +8,22 @@ type FilmsListProps = {
 
 
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {
-  const navigate = useNavigate();
+  const [activeFilmId, setActiveFilmId] = useState<string | null>(null);
 
 
   return (
     <div className="catalog__films-list">
-      {films.map(({id, name, previewImage,}) => (
-        <article key={id}
-          className="small-film-card catalog__films-card"
-          onClick={()=> navigate(`${AppRoute.Film}${id}`)}
-        >
-          <FilmCard
-            id={id}
-            filmName={name}
-            imageSrc={previewImage}
-            imageAlt={name}
-          />
-        </article>
+      {films.map(({id, name, previewImage}) => (
+        <FilmCard
+          key={id}
+          id={id}
+          filmName={name}
+          imageSrc={previewImage}
+          imageAlt={name}
+          isActive={activeFilmId === id}
+          onMouseEnter={() => setActiveFilmId(id)}
+          onMouseLeave={() => setActiveFilmId(null)}
+        />
       ))}
     </div>
   );
