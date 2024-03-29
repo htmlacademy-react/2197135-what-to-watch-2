@@ -4,7 +4,7 @@ import Logo from '@/components/logo/logo';
 import FilmsList from '@/components/films-list/films-list';
 
 import Header from '@/components/header/header';
-import { Film } from '@/types/types';
+import { Film } from '@/types/film';
 
 type MyListProps = {
   myFilms: Film[];

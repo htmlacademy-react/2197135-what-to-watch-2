@@ -1,4 +1,4 @@
-import { FilmInfo as FilmInfoType } from '@/types/types';
+import { FilmInfo as FilmInfoType } from '@/types/film-info';
 import FilmNavigation from '../film-navigation/film-navigation';
 import FilmOverview from '../film-overview/film-overview';
 

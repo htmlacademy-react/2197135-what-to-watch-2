@@ -1,4 +1,4 @@
-import { FilmDetails as FilmDetailsType } from '@/types/types';
+import { FilmDetails as FilmDetailsType } from '@/types/film-details';
 
 type FilmDetailsProps = {
   filmDetails: FilmDetailsType;

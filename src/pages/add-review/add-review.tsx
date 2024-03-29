@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import FilmHeroBlock from '@/components/film-heroblock/film-heroblock';
-import { Film } from '@/types/types';
+import { Film } from '@/types/film';
 import Page404 from '../page-404/page-404';
 import AddReviewForm from '@/components/add-review-form/add-review-form';
 

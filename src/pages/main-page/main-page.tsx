@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import FilmsList from '@/components/films-list/films-list';
 import Logo from '@/components/logo/logo';
 
-import { Film } from '@/types/types';
+import { Film } from '@/types/film';
 import Header from '@/components/header/header';
 
 type MainPageProps = {

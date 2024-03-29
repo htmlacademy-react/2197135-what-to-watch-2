@@ -1,4 +1,4 @@
-import { Film } from '@/types/types';
+import { Film } from '@/types/film';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Page404 from '../page-404/page-404';

@@ -4,12 +4,13 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/logo/logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
-import {FilmDetails, Film as FilmType } from '@/types/types';
-import { FilmInfo as FilmInfoType } from '@/types/types';
+import {Film as FilmType } from '@/types/film';
+import { FilmDetails } from '@/types/film-details';
+import { FilmInfo as FilmInfoType } from '@/types/film-info';
+import FilmInfo from '@/components/film-info/film-info';
 import Page404 from '../page-404/page-404';
 import FilmsList from '@/components/films-list/films-list';
 import FilmDetailsComponent from '@/components/film-details/film-details';
-import FilmInfo from '@/components/film-info/film-info';
 import UserReviews from '@/components/user-reviews/user-reviews';
 
 

@@ -11,7 +11,7 @@ import SignIn from '@/pages/sign-in/sign-in';
 import Page404 from '@/pages/page-404/page-404';
 
 import { AppRoute, LoginStatus } from '@/utils/const';
-import { Film as FilmType } from '@/types/types';
+import { Film as FilmType } from '@/types/film';
 
 
 type AppProps = {

@@ -1,4 +1,4 @@
-import { Film } from '@/types/types';
+import { Film } from '@/types/film';
 
 export const films: Film[] = [
   {
@@ -9,29 +9,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
     previewImage:
@@ -63,29 +63,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Bohemian Rhapsody',
     previewImage:
@@ -117,57 +117,57 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Macbeth',
     duration: '1h 33m 54s',
@@ -199,30 +199,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
-
+        date: '2022-11-13',
+      },
     ],
     name: 'Aviator',
     previewImage:
@@ -254,29 +253,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'We need to talk about Kevin',
     previewImage:
@@ -308,30 +307,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
-
+        date: '2022-11-13',
+      },
     ],
     name: 'What We Do in the Shadows',
     duration: '1h 33m 54s',
@@ -363,30 +361,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
-
+        date: '2022-11-13',
+      },
     ],
     name: 'The Revenant',
     duration: '1h 33m 54s',
@@ -418,30 +415,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
-
+        date: '2022-11-13',
+      },
     ],
     name: 'Johnny English',
     duration: '1h 33m 54s',
@@ -473,29 +469,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Shutter Island',
     duration: '1h 33m 54s',
@@ -516,8 +512,8 @@ export const films: Film[] = [
       'Biba bezBobi',
       'Pomogite',
     ],
-    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.'
-
+    description:
+      'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.',
   },
   {
     id: 'c1b10413-87b0-4947-8f7a-a5644a52be3d',
@@ -527,29 +523,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Pulp Fiction',
     duration: '1h 33m 54s',
@@ -581,30 +577,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
-
+        date: '2022-11-13',
+      },
     ],
     name: 'No Country for Old Men',
     duration: '1h 33m 54s',
@@ -625,7 +620,8 @@ export const films: Film[] = [
       'Biba bezBobi',
       'Pomogite',
     ],
-    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.'
+    description:
+      'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.',
   },
   {
     id: '514cac8b-49cb-4e6a-8a9a-d10119f96434',
@@ -635,29 +631,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Snatch',
     duration: '1h 33m 54s',
@@ -689,29 +685,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Moonrise Kingdom',
     duration: '1h 33m 54s',
@@ -743,29 +739,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Seven Years in Tibet',
     duration: '1h 33m 54s',
@@ -797,29 +793,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'Midnight Special',
     duration: '1h 33m 54s',
@@ -851,29 +847,29 @@ export const films: Film[] = [
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
+        date: '2022-11-13',
       },
       {
         id: crypto.randomUUID(),
         text: 'the best movie ever, wow, awesome.',
         user: 'Pupa i Lupa',
         rating: 8,
-        date: '2022-11-13'
-      }
+        date: '2022-11-13',
+      },
     ],
     name: 'War of the Worlds',
     duration: '1h 33m 54s',
