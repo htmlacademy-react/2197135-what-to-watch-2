@@ -25,8 +25,7 @@ export default function VideoPlayer({
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-
-  /*creation of side effect for event listener for loading video for active card */
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const playerElement = videoRef.current;
@@ -42,32 +41,36 @@ export default function VideoPlayer({
     };
   }, []);
 
-  /* creation of side effect to play a loaded video in DOM element */
-
   useEffect(() => {
     if (videoRef.current === null) {
       return;
     }
 
-    if(isPlaying) {
+    if (isPlaying) {
       videoRef.current.play();
     } else {
       videoRef.current.pause();
     }
-
   }, [isPlaying, isLoaded]);
 
-
   const handleMouseEnter = () => {
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       onMouseEnter();
     }, 1000);
   };
 
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    };
+    onMouseLeave();
+  }
+
+
   return (
     <div
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseLeave={handleMouseLeave}
       className="small-film-card__image"
     >
       {!isPlaying ? (
@@ -80,8 +83,7 @@ export default function VideoPlayer({
           width={width}
           height={height}
           muted
-        >
-        </video>
+        ></video>
       )}
     </div>
   );
