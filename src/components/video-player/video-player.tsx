@@ -62,9 +62,9 @@ export default function VideoPlayer({
   const handleMouseLeave = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-    };
+    }
     onMouseLeave();
-  }
+  };
 
 
   return (
@@ -83,7 +83,8 @@ export default function VideoPlayer({
           width={width}
           height={height}
           muted
-        ></video>
+        >
+        </video>
       )}
     </div>
   );
