@@ -2,15 +2,19 @@ import { FilmDetails as FilmDetailsType } from '@/types/film-details';
 
 type FilmDetailsProps = {
   filmDetails: FilmDetailsType;
-}
+};
 
-export default function FilmDetailsComponent({filmDetails}: FilmDetailsProps):JSX.Element {
+export default function FilmDetails({
+  filmDetails,
+}: FilmDetailsProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{filmDetails.director}</span>
+          <span className="film-card__details-value">
+            {filmDetails.director}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
@@ -27,7 +31,9 @@ export default function FilmDetailsComponent({filmDetails}: FilmDetailsProps):JS
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{filmDetails.duration}</span>
+          <span className="film-card__details-value">
+            {filmDetails.duration}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

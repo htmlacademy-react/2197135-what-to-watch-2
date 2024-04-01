@@ -1,36 +1,28 @@
+import { FilmOverview as FilmOverviewType } from '@/types/film-overview';
+
 type FilmOverviewProps = {
-  filmRating: number;
-  filmRatingCount: number;
-  filmRatingLevel: string;
-  filmDescription: string;
-  filmDirector: string;
-  filmActors: string[];
+  filmOverview: FilmOverviewType;
 };
 
 export default function FilmOverview({
-  filmRating,
-  filmRatingCount,
-  filmRatingLevel,
-  filmDescription,
-  filmDirector,
-  filmActors,
+  filmOverview,
 }: FilmOverviewProps): JSX.Element {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{filmRating}</div>
+        <div className="film-rating__score">{}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{filmRatingLevel}</span>
-          <span className="film-rating__count">{filmRatingCount}</span>
+          <span className="film-rating__level">{filmOverview.ratingLevel}</span>
+          <span className="film-rating__count">{filmOverview.ratingCount}</span>
         </p>
       </div>
       <div className="film-card__text">
-        <p>{filmDescription}</p>
+        <p>{filmOverview.description}</p>
         <p className="film-card__director">
-          <strong>{filmDirector}</strong>
+          <strong>{filmOverview.director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring: {filmActors}</strong>
+          <strong>Starring: {filmOverview.actors}</strong>
         </p>
       </div>
     </>

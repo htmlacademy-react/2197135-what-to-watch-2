@@ -4,11 +4,17 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/films/:id',
   AddReview = '/films/:id/review',
-  Player = '/player/:id'
+  Player = '/player/:id',
 }
 
 export enum LoginStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN'
+  Unknown = 'UNKNOWN',
+}
+
+export enum ActiveTabs {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
 }

@@ -1,36 +1,47 @@
-import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
 
+type FilmNavigationProps = {
+  activeTab: string;
+  onDetailsHandler: () => void;
+  onOverviewHandler: () => void;
+  onReviewHandler: () => void;
+};
 
-export default function FilmNavigation(): JSX.Element {
+export default function FilmNavigation({
+  activeTab,
+  onDetailsHandler,
+  onOverviewHandler,
+  onReviewHandler,
+}: FilmNavigationProps): JSX.Element {
   return (
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        <li className="filn-nav__item">
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'film-nav__link--active' : 'film-nav__link'}
-            to={''}
-          >
+        <li
+          className={cn('film-nav__item', {
+            'film-nav__item--active': activeTab === 'Overview',
+          })}
+        >
+          <button className="film-nav__link" onClick={onOverviewHandler}>
             Overview
-          </NavLink>
+          </button>
         </li>
-        <li className="film-nav__item">
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'fim-nav__link--active' : 'film-nav__link'}
-            to={''}
-          >
+        <li
+          className={cn('film-nav__item', {
+            'film-nav__item--active': activeTab === 'Details',
+          })}
+        >
+          <button className="film-nav__link" onClick={onDetailsHandler}>
             Details
-          </NavLink>
+          </button>
         </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'fim-nav__link--active' : 'film-nav__link'}
-            to={''}
-          >
+        <li
+          className={cn('film-nav__item', {
+            'film-nav__item--active': activeTab === 'Reviews',
+          })}
+        >
+          <button className="film-nav__link" onClick={onReviewHandler}>
             Reviews
-          </NavLink>
+          </button>
         </li>
       </ul>
     </nav>
