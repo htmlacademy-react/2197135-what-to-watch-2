@@ -4,15 +4,13 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/logo/logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
-import {Film as FilmType } from '@/types/film';
+import { Film as FilmType } from '@/types/film';
 import Page404 from '../page-404/page-404';
 import FilmDescription from '@/components/film-description/film-description';
 import SortedFilms from '@/components/sorted-films/sorted.films';
 
-
 type FilmProps = {
   films: FilmType[];
-  myFilms: FilmType[];
 };
 
 type Params = {
@@ -25,17 +23,16 @@ export default function Film({ films }: FilmProps): JSX.Element {
   if (!id) {
     return <Page404 />;
   }
+
   const film = films.find((item) => item.id === id);
 
   if (!film) {
     return <Page404 />;
-
   }
 
-  const {previewImage, genre, year, name,} = film;
+  const { previewImage, genre, year, name } = film;
 
-  const sortedFilms = films.filter(film => film.id !== id)
-
+  const sortedFilms = films.filter((currentFilm) => currentFilm.id !== id);
 
   return (
     <>
@@ -51,12 +48,12 @@ export default function Film({ films }: FilmProps): JSX.Element {
           id={id}
         />
         <div className="film-card__wrap film-card__translate-top">
-        <div className="film-card__info">
-        <div className="film-card__poster film-card__poster--big">
-          <img src={previewImage} alt={name} width={218} height={327} />
-        </div>
-          <FilmDescription film={film} />
-        </div>
+          <div className="film-card__info">
+            <div className="film-card__poster film-card__poster--big">
+              <img src={previewImage} alt={name} width={218} height={327} />
+            </div>
+            <FilmDescription film={film} />
+          </div>
         </div>
       </section>
       <div className="page-content">
@@ -71,4 +68,3 @@ export default function Film({ films }: FilmProps): JSX.Element {
     </>
   );
 }
-
