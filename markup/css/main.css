@@ -865,6 +865,7 @@ main {
   display: block;
   color: #EEE5B5;
   text-decoration: none;
+  background: none;
   position: relative;
   padding-bottom: 19px; }
   .film-nav__link::after {

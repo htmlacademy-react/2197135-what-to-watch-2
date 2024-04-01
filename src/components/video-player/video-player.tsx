@@ -66,7 +66,6 @@ export default function VideoPlayer({
     onMouseLeave();
   };
 
-
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -76,15 +75,7 @@ export default function VideoPlayer({
       {!isPlaying ? (
         <img src={poster} alt={name} width={width} height={height} />
       ) : (
-        <video
-          ref={videoRef}
-          src={src}
-          poster={poster}
-          width={width}
-          height={height}
-          muted
-        >
-        </video>
+        <video ref={videoRef} src={src} poster={poster} width={width} height={height} muted />
       )}
     </div>
   );
