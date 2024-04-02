@@ -1,5 +1,6 @@
 import { ActiveTabs } from '@/utils/const';
 import cn from 'classnames';
+import TabButton from '../tab-button/tab-button';
 
 type FilmNavigationProps = {
   activeTab: string;
@@ -22,9 +23,7 @@ export default function FilmNavigation({
               'film-nav__item--active': activeTab === value,
             })}
           >
-            <button className="film-nav__link" onClick={() => handleTabClick(value)}>
-              {value}
-            </button>
+            <TabButton onClick={() => handleTabClick(value)}>{value}</TabButton>
           </li>
         ))}
       </ul>

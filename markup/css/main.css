@@ -854,9 +854,9 @@ main {
 
 .film-nav__item {
   margin-right: 35px; }
-  .film-nav__item--active .film-nav__link {
+  .film-nav__item--active .tabButton {
     font-weight: bold; }
-    .film-nav__item--active .film-nav__link::after {
+    .film-nav__item--active .tabButton::after {
       display: block; }
   .film-nav__item:last-child {
     margin-right: 0; }
@@ -865,7 +865,6 @@ main {
   display: block;
   color: #EEE5B5;
   text-decoration: none;
-  background: none;
   position: relative;
   padding-bottom: 19px; }
   .film-nav__link::after {
@@ -1349,7 +1348,7 @@ main {
   display: inline-block;
   vertical-align: top;
   text-decoration: none;
-  color: #dfcf77; }
+  color: inherit; }
 
 .user-block {
   display: flex;

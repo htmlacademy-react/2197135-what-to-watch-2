@@ -1,0 +1,24 @@
+.tabButton {
+  display: block;
+  color: #EEE5B5;
+  text-decoration: none;
+  background: none;
+  position: relative;
+  padding-bottom: 19px;
+  background-color: none;
+  border: none;
+  cursor: pointer;
+}
+.tabButton::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  height: 4px;
+  bottom: 0;
+  background: #EEE5B5;
+  display: none; }
+
+.tabButton:hover::after {
+  display: block; }
