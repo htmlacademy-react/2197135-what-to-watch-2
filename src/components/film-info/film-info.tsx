@@ -52,15 +52,11 @@ export default function FilmInfo({
       case ActiveTabs.Details:
         return <FilmDetails filmDetails={filmDetails} />;
       case ActiveTabs.Reviews:
-        return <UserReviews reviews={reviews} />
+        return <UserReviews reviews={reviews} />;
       default:
         return <FilmOverview filmOverview={filmOverview} />;
     }
-  }
+  };
 
-  return (
-    <>
-      {renderTabContent()}
-    </>
-  );
+  return <>{renderTabContent()}</>;
 }
