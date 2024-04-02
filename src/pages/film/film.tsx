@@ -7,7 +7,7 @@ import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
 import { Film as FilmType } from '@/types/film';
 import Page404 from '../page-404/page-404';
 import FilmDescription from '@/components/film-description/film-description';
-import SortedFilms from '@/components/sorted-films/sorted.films';
+import SortedFilms from '@/components/sorted-films/sorted-films';
 
 type FilmProps = {
   films: FilmType[];

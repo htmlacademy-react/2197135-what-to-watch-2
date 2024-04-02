@@ -16,5 +16,5 @@ export enum LoginStatus {
 export enum ActiveTabs {
   Overview = 'Overview',
   Details = 'Details',
-  Reviews = 'Reviews',
+  Reviews = 'Reviews'
 }

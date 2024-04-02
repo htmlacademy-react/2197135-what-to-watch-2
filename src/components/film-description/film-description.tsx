@@ -13,26 +13,13 @@ export default function FilmDescription({
 }: FilmNavigationProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(ActiveTabs.Overview);
 
-  const onOverviewHandler = () => {
-    setActiveTab(ActiveTabs.Overview);
-  };
-
-  const onDetailsHandler = () => {
-    setActiveTab(ActiveTabs.Details);
-  };
-
-  const onReviewHandler = () => {
-    setActiveTab(ActiveTabs.Reviews);
+  const handleTabClick = (tab: ActiveTabs) => {
+    setActiveTab(ActiveTabs[tab]);
   };
 
   return (
     <div className="film-card__desc">
-      <FilmNavigation
-        activeTab={activeTab}
-        onOverviewHandler={onOverviewHandler}
-        onDetailsHandler={onDetailsHandler}
-        onReviewHandler={onReviewHandler}
-      />
+      <FilmNavigation activeTab={activeTab} handleTabClick={handleTabClick} />
       <FilmInfo film={film} activeTab={activeTab} />
     </div>
   );

@@ -4,6 +4,7 @@ import { FilmOverview as FilmOverviewType } from '@/types/film-overview';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import UserReviews from '../user-reviews/user-reviews';
+import { ActiveTabs } from '@/utils/const';
 
 type FilmInfoProps = {
   film: Film;
@@ -44,11 +45,22 @@ export default function FilmInfo({
     director,
   };
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case ActiveTabs.Overview:
+        return <FilmOverview filmOverview={filmOverview} />;
+      case ActiveTabs.Details:
+        return <FilmDetails filmDetails={filmDetails} />;
+      case ActiveTabs.Reviews:
+        return <UserReviews reviews={reviews} />
+      default:
+        return <FilmOverview filmOverview={filmOverview} />;
+    }
+  }
+
   return (
     <>
-      {activeTab === 'Overview' && <FilmOverview filmOverview={filmOverview} />}
-      {activeTab === 'Details' && <FilmDetails filmDetails={filmDetails} />}
-      {activeTab === 'Reviews' && <UserReviews reviews={reviews} />}
+      {renderTabContent()}
     </>
   );
 }

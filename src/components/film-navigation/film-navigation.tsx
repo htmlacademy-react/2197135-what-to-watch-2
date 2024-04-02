@@ -1,48 +1,34 @@
+import { ActiveTabs } from '@/utils/const';
 import cn from 'classnames';
 
 type FilmNavigationProps = {
   activeTab: string;
-  onDetailsHandler: () => void;
-  onOverviewHandler: () => void;
-  onReviewHandler: () => void;
+  handleTabClick: (tab: ActiveTabs) => void;
 };
 
 export default function FilmNavigation({
   activeTab,
-  onDetailsHandler,
-  onOverviewHandler,
-  onReviewHandler,
+  handleTabClick
 }: FilmNavigationProps): JSX.Element {
+
+
+  const activeTabsArray = Object.entries(ActiveTabs);
+
   return (
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        <li
+        {activeTabsArray.map(([key, value]) =>
+          <li
+          key={key}
           className={cn('film-nav__item', {
-            'film-nav__item--active': activeTab === 'Overview',
+            'film-nav__item--active': activeTab === value,
           })}
         >
-          <button className="film-nav__link" onClick={onOverviewHandler}>
-            Overview
+          <button className="film-nav__link" onClick={() => handleTabClick(value)}>
+            {value}
           </button>
         </li>
-        <li
-          className={cn('film-nav__item', {
-            'film-nav__item--active': activeTab === 'Details',
-          })}
-        >
-          <button className="film-nav__link" onClick={onDetailsHandler}>
-            Details
-          </button>
-        </li>
-        <li
-          className={cn('film-nav__item', {
-            'film-nav__item--active': activeTab === 'Reviews',
-          })}
-        >
-          <button className="film-nav__link" onClick={onReviewHandler}>
-            Reviews
-          </button>
-        </li>
+        )}
       </ul>
     </nav>
   );
