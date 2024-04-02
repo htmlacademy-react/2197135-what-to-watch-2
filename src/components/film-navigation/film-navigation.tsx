@@ -1,37 +1,31 @@
-import { NavLink } from 'react-router-dom';
+import { ActiveTabs } from '@/utils/const';
+import cn from 'classnames';
+import TabButton from '../tab-button/tab-button';
 
+type FilmNavigationProps = {
+  activeTab: string;
+  handleTabClick: (tab: ActiveTabs) => void;
+};
 
-export default function FilmNavigation(): JSX.Element {
+export default function FilmNavigation({
+  activeTab,
+  handleTabClick,
+}: FilmNavigationProps): JSX.Element {
+  const activeTabsArray = Object.entries(ActiveTabs);
+
   return (
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        <li className="filn-nav__item">
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'film-nav__link--active' : 'film-nav__link'}
-            to={''}
+        {activeTabsArray.map(([key, value]) => (
+          <li
+            key={key}
+            className={cn('film-nav__item', {
+              'film-nav__item--active': activeTab === value,
+            })}
           >
-            Overview
-          </NavLink>
-        </li>
-        <li className="film-nav__item">
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'fim-nav__link--active' : 'film-nav__link'}
-            to={''}
-          >
-            Details
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? 'fim-nav__link--active' : 'film-nav__link'}
-            to={''}
-          >
-            Reviews
-          </NavLink>
-        </li>
+            <TabButton onClick={() => handleTabClick(value)}>{value}</TabButton>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -35,7 +35,7 @@ export default function App({films, myFilms}: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Film} element={<Film films={films} myFilms={myFilms}/>} />
+          <Route path={AppRoute.Film} element={<Film films={films}/>} />
           <Route
             path={AppRoute.AddReview}
             element={

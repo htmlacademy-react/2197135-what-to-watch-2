@@ -4,43 +4,35 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/logo/logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
-import {Film as FilmType } from '@/types/film';
-import { FilmDetails } from '@/types/film-details';
-import { FilmInfo as FilmInfoType } from '@/types/film-info';
-import FilmInfo from '@/components/film-info/film-info';
+import { Film as FilmType } from '@/types/film';
 import Page404 from '../page-404/page-404';
-import FilmsList from '@/components/films-list/films-list';
-import FilmDetailsComponent from '@/components/film-details/film-details';
-import UserReviews from '@/components/user-reviews/user-reviews';
-
+import FilmDescription from '@/components/film-description/film-description';
+import SortedFilms from '@/components/sorted-films/sorted-films';
 
 type FilmProps = {
   films: FilmType[];
-  myFilms: FilmType[];
 };
 
 type Params = {
   id: string;
 };
 
-export default function Film({ films, myFilms }: FilmProps): JSX.Element {
+export default function Film({ films }: FilmProps): JSX.Element {
   const { id } = useParams<Params>();
 
   if (!id) {
     return <Page404 />;
   }
+
   const film = films.find((item) => item.id === id);
 
   if (!film) {
     return <Page404 />;
-
   }
 
-  const {director, previewImage, genre, year, name, reviews, actors, duration, description, ratingLevel, rating, ratingCount} = film;
+  const { previewImage, genre, year, name } = film;
 
-  const filmDetails: FilmDetails = {director, genre, year, actors, duration};
-
-  const filmInfo: FilmInfoType = {name, id, previewImage, rating, ratingLevel, ratingCount, description, actors, director};
+  const sortedFilms = films.filter((currentFilm) => currentFilm.id !== id);
 
   return (
     <>
@@ -56,13 +48,16 @@ export default function Film({ films, myFilms }: FilmProps): JSX.Element {
           id={id}
         />
         <div className="film-card__wrap film-card__translate-top">
-          <FilmInfo filmInfo={filmInfo} />
-          <FilmDetailsComponent filmDetails={filmDetails} />
-          <UserReviews reviews={reviews} />
+          <div className="film-card__info">
+            <div className="film-card__poster film-card__poster--big">
+              <img src={previewImage} alt={name} width={218} height={327} />
+            </div>
+            <FilmDescription film={film} />
+          </div>
         </div>
       </section>
       <div className="page-content">
-        <FilmsList films={myFilms} />
+        <SortedFilms films={sortedFilms} genre={genre} />
         <footer className="page-footer">
           <Logo />
           <div className="copyright">
@@ -73,4 +68,3 @@ export default function Film({ films, myFilms }: FilmProps): JSX.Element {
     </>
   );
 }
-
