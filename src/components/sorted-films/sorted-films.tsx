@@ -12,5 +12,10 @@ export default function SortedFilms({
 }: SortedFilmsProps): JSX.Element {
   const sortedFilms = films.filter((film) => film.genre === genre);
 
-  return <FilmsList films={sortedFilms} />;
+  return (
+    <section className='catalog catalog--like-this'>
+      <h2 className="catalog__title">More like this</h2>
+      <FilmsList films={sortedFilms}/>
+    </section>
+  );
 }
