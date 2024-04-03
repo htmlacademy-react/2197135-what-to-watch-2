@@ -32,7 +32,7 @@ export default function FilmDetails({
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
           <span className="film-card__details-value">
-            {filmDetails.duration}
+            {filmDetails.duration.slice(0, -3)}
           </span>
         </p>
         <p className="film-card__details-item">

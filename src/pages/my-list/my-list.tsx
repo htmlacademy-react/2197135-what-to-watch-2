@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import Logo from '@/components/logo/logo';
+import Logo from '@/components/footer-logo/footer-logo';
 import FilmsList from '@/components/films-list/films-list';
 
 import Header from '@/components/header/header';

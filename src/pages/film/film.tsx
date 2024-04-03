@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet-async';
 
-import Logo from '@/components/logo/logo';
+import Logo from '@/components/footer-logo/footer-logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
 import { Film as FilmType } from '@/types/film';
 import Page404 from '../page-404/page-404';

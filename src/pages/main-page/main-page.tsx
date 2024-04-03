@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 
 import FilmsList from '@/components/films-list/films-list';
-import Logo from '@/components/logo/logo';
-
 import { Film } from '@/types/film';
 import Header from '@/components/header/header';
+import FooterLogo from '@/components/footer-logo/footer-logo';
 
 type MainPageProps = {
   films: Film[];
@@ -129,7 +128,7 @@ export default function MainPage({ films }: MainPageProps): JSX.Element {
           </div>
         </section>
         <footer className="page-footer">
-          <Logo />
+          <FooterLogo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
