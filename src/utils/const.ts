@@ -18,3 +18,16 @@ export enum ActiveTabs {
   Details = 'Details',
   Reviews = 'Reviews'
 }
+
+export enum Genres {
+  AllGenres = 'All genres',
+  Comedies = 'Comedy',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Drama = 'Drama',
+  Horror = 'Horror',
+  KidsAndFamily = 'Kids & Family',
+  Romance = 'Romance',
+  SciFi = 'Sci-Fi',
+  Thrillers = 'Thriller'
+}
