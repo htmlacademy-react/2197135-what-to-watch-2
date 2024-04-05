@@ -1,15 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/header/header';
 import FooterLogo from '@/components/footer-logo/footer-logo';
-import FilmsCatalogue from '@/components/films-catalog/films-catalog';
-import { useAppDispatch } from '@/hooks';
+import FilmsCatalog from '@/components/films-catalog/films-catalog';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { resetGenreAction } from '@/store/action';
 
-
 export default function MainPage(): JSX.Element {
-  const dispatch = useAppDispatch();
 
-  dispatch(resetGenreAction());
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetGenreAction());
+  },[dispatch]);
 
   return (
     <>
@@ -67,7 +70,7 @@ export default function MainPage(): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <FilmsCatalogue/>
+        <FilmsCatalog />
         <footer className="page-footer">
           <FooterLogo />
           <div className="copyright">

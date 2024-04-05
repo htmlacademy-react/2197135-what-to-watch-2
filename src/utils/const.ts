@@ -1,3 +1,5 @@
+import { films } from '@/mocks/films';
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -16,18 +18,9 @@ export enum LoginStatus {
 export enum ActiveTabs {
   Overview = 'Overview',
   Details = 'Details',
-  Reviews = 'Reviews'
+  Reviews = 'Reviews',
 }
 
-export enum Genres {
-  AllGenres = 'All genres',
-  Comedies = 'Comedy',
-  Crime = 'Crime',
-  Documentary = 'Documentary',
-  Drama = 'Drama',
-  Horror = 'Horror',
-  KidsAndFamily = 'Kids & Family',
-  Romance = 'Romance',
-  SciFi = 'Sci-Fi',
-  Thrillers = 'Thriller'
-}
+const filmGenres = Array.from(new Set(films.map((film) => film.genre)));
+
+export const genres = ['All genres', ...filmGenres];

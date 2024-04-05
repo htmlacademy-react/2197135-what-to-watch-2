@@ -1,11 +1,11 @@
 import { films } from '@/mocks/films';
 import { createReducer } from '@reduxjs/toolkit';
 import { chooseGenreAction, resetGenreAction} from './action';
-import { Genres } from '@/utils/const';
+import { genres } from '@/utils/const';
 
 
 const initialState = {
-  genre: Genres.AllGenres,
+  genre: genres[0],
   films: films
 };
 
@@ -17,7 +17,7 @@ export const reducer = createReducer(initialState, (buider) => {
       state.films = films.filter((film) => film.genre === state.genre);
     })
     .addCase(resetGenreAction, (state) => {
-      state.genre = Genres.AllGenres;
+      state.genre = genres[0];
       state.films = films;
     });
 });

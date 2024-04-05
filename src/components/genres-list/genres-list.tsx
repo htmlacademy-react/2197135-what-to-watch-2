@@ -1,18 +1,18 @@
-import { Genres } from '@/utils/const';
+import { genres } from '@/utils/const';
 import cn from 'classnames';
 
 type GenresListProps = {
   activeGenre: string;
-  handleSortClick: (value: Genres) => void;
+  onSortClick: (value: string) => void;
 };
 
 export default function GenresList({
   activeGenre,
-  handleSortClick,
+  onSortClick,
 }: GenresListProps) {
   return (
     <ul className="catalog__genres-list">
-      {Object.entries(Genres).map(([key, value]) => (
+      {Object.entries(genres).map(([key, value]) => (
         <li
           key={key}
           className={cn('catalog__genres-item', {
@@ -22,7 +22,7 @@ export default function GenresList({
           <a
             href="#"
             className="catalog__genres-link"
-            onClick={() => handleSortClick(value)}
+            onClick={() => onSortClick(value)}
           >
             {value}
           </a>

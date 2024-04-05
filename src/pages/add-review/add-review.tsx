@@ -5,12 +5,8 @@ import Page404 from '../page-404/page-404';
 import AddReviewForm from '@/components/add-review-form/add-review-form';
 import { useAppSelector } from '@/hooks';
 
-type Params = {
-  id: string;
-};
-
 export default function AddReview(): JSX.Element {
-  const { id } = useParams<Params>();
+  const { id } = useParams<{id: string}>();
   const films = useAppSelector((state) => state.films);
 
   const film = films.find((item) => item.id === id);

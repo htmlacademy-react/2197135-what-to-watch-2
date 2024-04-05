@@ -2,20 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Page404 from '../page-404/page-404';
 import { AppRoute } from '@/utils/const';
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { resetGenreAction } from '@/store/action';
-
-type Params = {
-  id: string;
-};
+import { useAppSelector } from '@/hooks';
 
 export default function Player(): JSX.Element {
   const navigate = useNavigate();
 
-  const { id } = useParams<Params>();
-
-  const dispatch = useAppDispatch();
-  dispatch(resetGenreAction());
+  const { id } = useParams<{id: string}>();
 
   const films = useAppSelector((state) => state.films);
 
