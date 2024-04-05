@@ -7,12 +7,11 @@ import { useDispatch } from 'react-redux';
 import { resetGenreAction } from '@/store/action';
 
 export default function MainPage(): JSX.Element {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(resetGenreAction());
-  },[dispatch]);
+  }, [dispatch]);
 
   return (
     <>

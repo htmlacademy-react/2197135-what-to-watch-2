@@ -10,7 +10,7 @@ import SortedFilms from '@/components/sorted-films/sorted-films';
 import { useAppSelector } from '@/hooks';
 
 export default function Film(): JSX.Element {
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams<{ id: string }>();
   const films = useAppSelector((state) => state.films);
 
   if (!id) {

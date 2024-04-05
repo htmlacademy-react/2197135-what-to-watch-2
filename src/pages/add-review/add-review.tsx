@@ -6,7 +6,7 @@ import AddReviewForm from '@/components/add-review-form/add-review-form';
 import { useAppSelector } from '@/hooks';
 
 export default function AddReview(): JSX.Element {
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams<{ id: string }>();
   const films = useAppSelector((state) => state.films);
 
   const film = films.find((item) => item.id === id);

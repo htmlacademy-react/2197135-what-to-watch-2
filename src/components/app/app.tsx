@@ -17,7 +17,7 @@ type AppProps = {
   myFilms: FilmType[];
 };
 
-export default function App({myFilms}: AppProps): JSX.Element {
+export default function App({ myFilms }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
