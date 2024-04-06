@@ -4,21 +4,14 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '@/components/footer-logo/footer-logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
-import { Film as FilmType } from '@/types/film';
 import Page404 from '../page-404/page-404';
 import FilmDescription from '@/components/film-description/film-description';
 import SortedFilms from '@/components/sorted-films/sorted-films';
+import { useAppSelector } from '@/hooks';
 
-type FilmProps = {
-  films: FilmType[];
-};
-
-type Params = {
-  id: string;
-};
-
-export default function Film({ films }: FilmProps): JSX.Element {
-  const { id } = useParams<Params>();
+export default function Film(): JSX.Element {
+  const { id } = useParams<{ id: string }>();
+  const films = useAppSelector((state) => state.films);
 
   if (!id) {
     return <Page404 />;

@@ -16,5 +16,9 @@ export enum LoginStatus {
 export enum ActiveTabs {
   Overview = 'Overview',
   Details = 'Details',
-  Reviews = 'Reviews'
+  Reviews = 'Reviews',
 }
+
+export const ALL_GENRES = 'All Genres';
+
+export const MAX_FILM_TO_SHOW = 8;

@@ -13,19 +13,16 @@ import Page404 from '@/pages/page-404/page-404';
 import { AppRoute, LoginStatus } from '@/utils/const';
 import { Film as FilmType } from '@/types/film';
 
-
 type AppProps = {
-  films: FilmType[];
   myFilms: FilmType[];
 };
 
-export default function App({films, myFilms}: AppProps): JSX.Element {
-
+export default function App({ myFilms }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<MainPage films={films} />} />
+          <Route path={AppRoute.Main} element={<MainPage />} />
           <Route path={AppRoute.SignIn} element={<SignIn />} />
           <Route
             path={AppRoute.MyList}
@@ -35,16 +32,16 @@ export default function App({films, myFilms}: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Film} element={<Film films={films}/>} />
+          <Route path={AppRoute.Film} element={<Film />} />
           <Route
             path={AppRoute.AddReview}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
-                <AddReview films={films} />
+                <AddReview />
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Player} element={<Player films={films}/>} />
+          <Route path={AppRoute.Player} element={<Player />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

@@ -1,20 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import FilmHeroBlock from '@/components/film-heroblock/film-heroblock';
-import { Film } from '@/types/film';
 import Page404 from '../page-404/page-404';
 import AddReviewForm from '@/components/add-review-form/add-review-form';
+import { useAppSelector } from '@/hooks';
 
-type AddReviewProps = {
-  films: Film[];
-};
-
-type Params = {
-  id: string;
-};
-
-export default function AddReview({ films }: AddReviewProps): JSX.Element {
-  const { id } = useParams<Params>();
+export default function AddReview(): JSX.Element {
+  const { id } = useParams<{ id: string }>();
+  const films = useAppSelector((state) => state.films);
 
   const film = films.find((item) => item.id === id);
 

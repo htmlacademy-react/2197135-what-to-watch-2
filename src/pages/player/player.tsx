@@ -1,25 +1,19 @@
-import { Film } from '@/types/film';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Page404 from '../page-404/page-404';
 import { AppRoute } from '@/utils/const';
+import { useAppSelector } from '@/hooks';
 
-type PlayerProps = {
-  films: Film[];
-}
-
-type Params = {
-  id: string;
-}
-
-export default function Player({films}:PlayerProps): JSX.Element {
+export default function Player(): JSX.Element {
   const navigate = useNavigate();
 
-  const {id} = useParams<Params>();
+  const { id } = useParams<{ id: string }>();
+
+  const films = useAppSelector((state) => state.films);
 
   const chosenFilm = films.find((film) => id === film.id);
 
-  if(!chosenFilm) {
+  if (!chosenFilm) {
     return <Page404 />;
   }
 
@@ -28,8 +22,16 @@ export default function Player({films}:PlayerProps): JSX.Element {
       <Helmet>
         <title>What to whatch. Player</title>
       </Helmet>
-      <video src={chosenFilm.previewVideoLink} className="player__video" poster={chosenFilm.previewImage}></video>
-      <button onClick={() => navigate(AppRoute.Main)} type="button" className="player__exit">
+      <video
+        src={chosenFilm.previewVideoLink}
+        className="player__video"
+        poster={chosenFilm.previewImage}
+      />
+      <button
+        onClick={() => navigate(AppRoute.Main)}
+        type="button"
+        className="player__exit"
+      >
         Exit
       </button>
       <div className="player__controls">
