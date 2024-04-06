@@ -1,20 +1,21 @@
-import { genres } from '@/utils/const';
 import cn from 'classnames';
 
 type GenresListProps = {
   activeGenre: string;
   onSortClick: (value: string) => void;
+  genres: string[];
 };
 
 export default function GenresList({
   activeGenre,
   onSortClick,
+  genres
 }: GenresListProps) {
   return (
     <ul className="catalog__genres-list">
-      {Object.entries(genres).map(([key, value]) => (
+      {genres.map((value) => (
         <li
-          key={key}
+          key={value}
           className={cn('catalog__genres-item', {
             'catalog__genres-item--active': activeGenre === value,
           })}

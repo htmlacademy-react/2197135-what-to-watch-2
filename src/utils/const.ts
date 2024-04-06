@@ -1,5 +1,3 @@
-import { films } from '@/mocks/films';
-
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -21,6 +19,6 @@ export enum ActiveTabs {
   Reviews = 'Reviews',
 }
 
-const filmGenres = Array.from(new Set(films.map((film) => film.genre)));
+export const ALL_GENRES = 'All Genres';
 
-export const genres = ['All genres', ...filmGenres];
+export const MAX_FILM_TO_SHOW = 8;
