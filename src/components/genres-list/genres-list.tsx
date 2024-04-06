@@ -9,7 +9,7 @@ type GenresListProps = {
 export default function GenresList({
   activeGenre,
   onSortClick,
-  genres
+  genres,
 }: GenresListProps) {
   return (
     <ul className="catalog__genres-list">
