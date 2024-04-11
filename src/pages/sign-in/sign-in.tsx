@@ -1,28 +1,73 @@
 import { Helmet } from 'react-helmet-async';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch } from '@/hooks';
+import { LoginData } from '@/types/login-data';
+import { loginAction } from '@/store/api-actions';
+import Header from '@/components/header/header';
+import FooterLogo from '@/components/footer-logo/footer-logo';
 
-import Logo from '@/components/footer-logo/footer-logo';
+const loginErrorMessages = {
+  LOGIN_IS_EMPTY: 'поля не могут быть пустые',
+  LOGIN_IS_NOT_EMAIL: 'введен некорректный эмейл',
+  LOGIN_IS_NOT_VALID_PASSWORD: 'пароль должен содержать и буквы и цифры'
+};
+
+const isNotEmpty = (value: string) => value.trim() !== '';
+const isEmail = (value: string) => value.includes('@');
+
+const isValidPassword = (value: string) => {
+  const hasDigit = /\d/.test(value);
+  const hasLetter = /[a-zA-Zа-яА-Я]/.test(value);
+  return value.length > 0 && hasDigit && hasLetter;
+};
 
 export default function SignIn() {
+
+  const [loginData, setLoginData] = useState ({
+    login: '',
+    password: ''
+  });
+
+
+  const dispatch = useAppDispatch();
+
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setLoginData((prevState) => ({...prevState, [name]: value}));
+  };
+
+  const onSubmit = (authData: LoginData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (isNotEmpty(loginData.login) && isNotEmpty(loginData.password) && isEmail(loginData.login) && isValidPassword(loginData.password)) {
+      onSubmit(loginData);
+    }
+  };
+
   return (
     <div className="user-page">
       <Helmet>
         <title>What to whatch.Log in</title>
       </Helmet>
-      <header className="page-header user-page__head">
-        <Logo />
-        <h1 className="page-title user-page__title">Sign in</h1>
-      </header>
+      <Header />
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
-                name="user-email"
-                id="user-email"
+                name="login"
+                id="login"
+                value={loginData.login}
+                onChange={handleInputChange}
               />
+              {!isNotEmpty(loginData.login) && <p>{loginErrorMessages.LOGIN_IS_EMPTY}</p>}
+              {!isEmail(loginData.login) && <p>{loginErrorMessages.LOGIN_IS_NOT_EMAIL}</p>}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-email"
@@ -35,9 +80,12 @@ export default function SignIn() {
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
-                name="user-password"
-                id="user-password"
+                name="password"
+                id="password"
+                value={loginData.password}
+                onChange={handleInputChange}
               />
+              {!isValidPassword(loginData.password) && <p>{loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD}</p>}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-password"
@@ -54,7 +102,7 @@ export default function SignIn() {
         </form>
       </div>
       <footer className="page-footer">
-        <Logo />
+        <FooterLogo />
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>
         </div>

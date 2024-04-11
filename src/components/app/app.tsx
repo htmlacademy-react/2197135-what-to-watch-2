@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import PrivateRoute from '../private-route/private-route';
@@ -12,22 +12,35 @@ import Page404 from '@/pages/page-404/page-404';
 
 import { AppRoute, LoginStatus } from '@/utils/const';
 import { Film as FilmType } from '@/types/film';
+import { useAppSelector } from '@/hooks';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '@/services/browser-history';
 
 type AppProps = {
   myFilms: FilmType[];
 };
 
 export default function App({ myFilms }: AppProps): JSX.Element {
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const isFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
+
+  if (authStatus === LoginStatus.Unknown || isFilmsLoading) {
+    return (
+      <LoadingSpinner />
+    );
+  }
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Main} element={<MainPage />} />
           <Route path={AppRoute.SignIn} element={<SignIn />} />
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute loginStatus={LoginStatus.Auth}>
+              <PrivateRoute>
                 <MyList myFilms={myFilms} />
               </PrivateRoute>
             }
@@ -36,7 +49,7 @@ export default function App({ myFilms }: AppProps): JSX.Element {
           <Route
             path={AppRoute.AddReview}
             element={
-              <PrivateRoute loginStatus={LoginStatus.Auth}>
+              <PrivateRoute>
                 <AddReview />
               </PrivateRoute>
             }
@@ -44,7 +57,7 @@ export default function App({ myFilms }: AppProps): JSX.Element {
           <Route path={AppRoute.Player} element={<Player />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

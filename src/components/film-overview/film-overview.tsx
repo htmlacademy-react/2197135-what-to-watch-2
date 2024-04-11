@@ -8,16 +8,12 @@ export default function FilmOverview({
   filmOverview,
 }: FilmOverviewProps): JSX.Element {
 
-  const ratingLevelCapitalLetter = filmOverview.ratingLevel.slice(0,1).toUpperCase();
-  const ratingLevelRestLetters = filmOverview.ratingLevel.slice(1);
-  const ratingLevel = ratingLevelCapitalLetter.concat(ratingLevelRestLetters);
-
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{filmOverview.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{ratingLevel}</span>
+          <span className="film-rating__level">{filmOverview.ratingLevel}</span>
           <span className="film-rating__count">{filmOverview.ratingCount} ratings </span>
         </p>
       </div>
