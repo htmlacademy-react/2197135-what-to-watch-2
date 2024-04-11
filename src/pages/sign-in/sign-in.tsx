@@ -9,7 +9,7 @@ import FooterLogo from '@/components/footer-logo/footer-logo';
 const loginErrorMessages = {
   LOGIN_IS_EMPTY: 'поля не могут быть пустые',
   LOGIN_IS_NOT_EMAIL: 'введен некорректный эмейл',
-  LOGIN_IS_NOT_VALID_PASSWORD: 'пароль должен содержать и буквы и цифры'
+  LOGIN_IS_NOT_VALID_PASSWORD: 'пароль должен содержать и буквы и цифры',
 };
 
 const isNotEmpty = (value: string) => value.trim() !== '';
@@ -22,18 +22,16 @@ const isValidPassword = (value: string) => {
 };
 
 export default function SignIn() {
-
-  const [loginData, setLoginData] = useState ({
+  const [loginData, setLoginData] = useState({
     login: '',
-    password: ''
+    password: '',
   });
-
 
   const dispatch = useAppDispatch();
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = evt.target;
-    setLoginData((prevState) => ({...prevState, [name]: value}));
+    const { name, value } = evt.target;
+    setLoginData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const onSubmit = (authData: LoginData) => {
@@ -42,7 +40,12 @@ export default function SignIn() {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (isNotEmpty(loginData.login) && isNotEmpty(loginData.password) && isEmail(loginData.login) && isValidPassword(loginData.password)) {
+    if (
+      isNotEmpty(loginData.login) &&
+      isNotEmpty(loginData.password) &&
+      isEmail(loginData.login) &&
+      isValidPassword(loginData.password)
+    ) {
       onSubmit(loginData);
     }
   };
@@ -66,8 +69,12 @@ export default function SignIn() {
                 value={loginData.login}
                 onChange={handleInputChange}
               />
-              {!isNotEmpty(loginData.login) && <p>{loginErrorMessages.LOGIN_IS_EMPTY}</p>}
-              {!isEmail(loginData.login) && <p>{loginErrorMessages.LOGIN_IS_NOT_EMAIL}</p>}
+              {!isNotEmpty(loginData.login) && (
+                <p>{loginErrorMessages.LOGIN_IS_EMPTY}</p>
+              )}
+              {!isEmail(loginData.login) && (
+                <p>{loginErrorMessages.LOGIN_IS_NOT_EMAIL}</p>
+              )}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-email"
@@ -85,7 +92,9 @@ export default function SignIn() {
                 value={loginData.password}
                 onChange={handleInputChange}
               />
-              {!isValidPassword(loginData.password) && <p>{loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD}</p>}
+              {!isValidPassword(loginData.password) && (
+                <p>{loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD}</p>
+              )}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-password"
