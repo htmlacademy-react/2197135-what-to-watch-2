@@ -5,6 +5,7 @@ import { LoginData } from '@/types/login-data';
 import { loginAction } from '@/store/api-actions';
 import Header from '@/components/header/header';
 import FooterLogo from '@/components/footer-logo/footer-logo';
+import {toast} from 'react-toastify';
 
 const loginErrorMessages = {
   LOGIN_IS_EMPTY: 'поля не могут быть пустые',
@@ -14,7 +15,6 @@ const loginErrorMessages = {
 
 const isNotEmpty = (value: string) => value.trim() !== '';
 const isEmail = (value: string) => value.includes('@');
-
 const isValidPassword = (value: string) => {
   const hasDigit = /\d/.test(value);
   const hasLetter = /[a-zA-Zа-яА-Я]/.test(value);
@@ -48,6 +48,18 @@ export default function SignIn() {
     ) {
       onSubmit(loginData);
     }
+
+    if(!isNotEmpty(loginData.login) || !isNotEmpty(loginData.password)) {
+      toast.warn(loginErrorMessages.LOGIN_IS_EMPTY);
+    }
+
+    if(!isEmail(loginData.login)) {
+      toast.warn(loginErrorMessages.LOGIN_IS_NOT_EMAIL);
+    }
+
+    if(!isValidPassword(loginData.password)) {
+      toast.warn(loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD);
+    }
   };
 
   return (
@@ -69,12 +81,6 @@ export default function SignIn() {
                 value={loginData.login}
                 onChange={handleInputChange}
               />
-              {!isNotEmpty(loginData.login) && (
-                <p>{loginErrorMessages.LOGIN_IS_EMPTY}</p>
-              )}
-              {!isEmail(loginData.login) && (
-                <p>{loginErrorMessages.LOGIN_IS_NOT_EMAIL}</p>
-              )}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-email"
@@ -92,9 +98,6 @@ export default function SignIn() {
                 value={loginData.password}
                 onChange={handleInputChange}
               />
-              {!isValidPassword(loginData.password) && (
-                <p>{loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD}</p>
-              )}
               <label
                 className="sign-in__label visually-hidden"
                 htmlFor="user-password"

@@ -4,13 +4,11 @@ import {
   APIRoute,
   AppRoute,
   LoginStatus,
-  TIMEOUT_SHOW_ERROR,
 } from '@/utils/const';
 import {
   loadFilmsAction,
   redirectToRouteAction,
   setAuthorizationAction,
-  setErrorAction,
   setFilmsLoadingStatusAction,
 } from './action';
 import { Film } from '@/types/film';
@@ -18,11 +16,7 @@ import { AppDispatch, State } from '@/types/state';
 import { LoginData } from '@/types/login-data';
 import { dropToken, saveToken } from '@/services/token';
 import { UserData } from '@/types/user-data';
-import { store } from '.';
 
-export const clearErrorAction = createAsyncThunk('clearAction', () => {
-  setTimeout(() => store.dispatch(setErrorAction(null)), TIMEOUT_SHOW_ERROR);
-});
 
 export const fetchFilmsAction = createAsyncThunk<
   void,

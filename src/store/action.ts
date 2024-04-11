@@ -9,7 +9,6 @@ export const resetShownFilmsAction = createAction('resetShownFilms');
 export const loadFilmsAction = createAction<[] | Film[]>('data/loadFilms');
 export const setAuthorizationAction =
   createAction<LoginStatus>('setAuthorization');
-export const setErrorAction = createAction<string | null>('setError');
 export const setFilmsLoadingStatusAction = createAction<boolean>(
   'setFilmsLoadingStatus'
 );

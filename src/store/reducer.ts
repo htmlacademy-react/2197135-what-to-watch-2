@@ -5,7 +5,6 @@ import {
   resetShownFilmsAction,
   showMoreAction,
   loadFilmsAction,
-  setErrorAction,
   setFilmsLoadingStatusAction,
   setAuthorizationAction,
 } from './action';
@@ -18,7 +17,6 @@ type InitialState = {
   filmsShown: number;
   authorizationStatus: LoginStatus;
   isFilmsLoading: boolean;
-  error: string | null;
 };
 
 const initialState: InitialState = {
@@ -27,7 +25,6 @@ const initialState: InitialState = {
   filmsShown: MAX_FILM_TO_SHOW,
   authorizationStatus: LoginStatus.Unknown,
   isFilmsLoading: false,
-  error: null,
 };
 
 export const reducer = createReducer(initialState, (buider) => {
@@ -54,8 +51,5 @@ export const reducer = createReducer(initialState, (buider) => {
     })
     .addCase(setAuthorizationAction, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setErrorAction, (state, action) => {
-      state.error = action.payload;
     });
 });
