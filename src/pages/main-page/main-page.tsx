@@ -5,6 +5,7 @@ import FilmsCatalog from '@/components/films-catalog/films-catalog';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetGenreAction } from '@/store/action';
+import UserBlock from '@/components/user-block/user-block';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -29,7 +30,9 @@ export default function MainPage(): JSX.Element {
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <Header />
+        <Header className={'film-card__head'}>
+          <UserBlock />
+        </Header>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">

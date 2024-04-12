@@ -60,7 +60,7 @@ export const loginAction = createAsyncThunk<
   }
 >(
   'user/login',
-  async ({ login: email, password }, { dispatch, extra: api }) => {
+  async ({ email, password }, { dispatch, extra: api }) => {
     const {
       data: { token },
     } = await api.post<UserData>(APIRoute.Login, { email, password });
