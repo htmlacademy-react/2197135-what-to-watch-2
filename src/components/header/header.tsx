@@ -1,24 +1,16 @@
+import { ReactNode } from 'react';
 import Logo from '../logo/logo';
 
-export default function Header() {
+type HeaderProps = {
+  children?: ReactNode;
+  className: string;
+};
+
+export default function Header({ className, children }: HeaderProps) {
   return (
-    <header className="page-header film-card__head">
-      <Logo />
-      <ul className="user-block">
-        <li className="user-block__item">
-          <div className="user-block__avatar">
-            <img
-              src="img/avatar.jpg"
-              alt="User avatar"
-              width="63"
-              height="63"
-            />
-          </div>
-        </li>
-        <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
-        </li>
-      </ul>
+    <header className={`page-header ${className}`}>
+      <Logo className='logo__link' />
+      {children}
     </header>
   );
 }

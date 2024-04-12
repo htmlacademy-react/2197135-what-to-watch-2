@@ -1,13 +1,11 @@
 import { useParams } from 'react-router-dom';
-
 import { Helmet } from 'react-helmet-async';
-
-import Logo from '@/components/footer-logo/footer-logo';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
 import Page404 from '../page-404/page-404';
 import FilmDescription from '@/components/film-description/film-description';
 import SortedFilms from '@/components/sorted-films/sorted-films';
 import { useAppSelector } from '@/hooks';
+import Footer from '@/components/footer/footer';
 
 export default function Film(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -51,12 +49,7 @@ export default function Film(): JSX.Element {
       </section>
       <div className="page-content">
         <SortedFilms films={sortedFilms} genre={genre} />
-        <footer className="page-footer">
-          <Logo />
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
