@@ -109,7 +109,7 @@ export default function AddReviewForm() {
           />
           <div className="add-review__submit">
             <button
-              disabled={!isValid}
+              disabled={!isValid && userCommentStatus === FetchStatus.Pending}
               className="add-review__btn"
               type="submit"
             >
