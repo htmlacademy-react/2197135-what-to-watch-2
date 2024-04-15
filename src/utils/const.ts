@@ -5,6 +5,8 @@ export enum AppRoute {
   Film = '/films/:id',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
+  NotFound = '/*',
+  Error = '/error'
 }
 
 export enum LoginStatus {
@@ -24,11 +26,23 @@ export enum APIRoute {
   Promo = '/promo',
   Favorite = '/favorite',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments'
 }
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export enum FetchStatus {
+  Idle = 'Idle',
+  Pending = 'Pending',
+  Success = 'Success',
+  Failed = 'Failed'
+}
+
+export enum NameSpace {
+  User = 'USER',
+  Films = 'FILMS',
+}
 
 export const ALL_GENRES = 'All Genres';
 
 export const MAX_FILM_TO_SHOW = 8;
+

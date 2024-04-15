@@ -3,18 +3,22 @@ import UserBlock from '../user-block/user-block';
 import { UserControlButtons } from '../user-control-buttons/user-control-buttons';
 
 type FilmHeroblockProps = {
-  image: string;
   name: string;
   genre: string;
   year: number;
-  id: string;
-}
+  backgroundPoster: string;
+};
 
-export default function FilmHeroBlock({id, image, name, genre, year}: FilmHeroblockProps): JSX.Element {
+export default function FilmHeroBlock({
+  backgroundPoster,
+  name,
+  genre,
+  year,
+}: FilmHeroblockProps): JSX.Element {
   return (
     <div className="film-card__hero">
       <div className="film-card__bg">
-        <img src={image} alt={name} />
+        <img src={backgroundPoster} alt={name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -28,7 +32,7 @@ export default function FilmHeroBlock({id, image, name, genre, year}: FilmHerobl
             <span className="film-card__genre">{genre}</span>
             <span className="film-card__year">{year}</span>
           </p>
-          <UserControlButtons id={id} />
+          <UserControlButtons />
         </div>
       </div>
     </div>

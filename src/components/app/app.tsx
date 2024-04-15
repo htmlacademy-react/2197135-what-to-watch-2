@@ -10,27 +10,12 @@ import Player from '@/pages/player/player';
 import SignIn from '@/pages/sign-in/sign-in';
 import Page404 from '@/pages/page-404/page-404';
 
-import { AppRoute, LoginStatus } from '@/utils/const';
-import { Film as FilmType } from '@/types/film';
-import { useAppSelector } from '@/hooks';
-import LoadingSpinner from '../loading-spinner/loading-spinner';
+import { AppRoute } from '@/utils/const';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '@/services/browser-history';
+import ErrorPage from '@/pages/error-page/error-page';
 
-type AppProps = {
-  myFilms: FilmType[];
-};
-
-export default function App({ myFilms }: AppProps): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
-  const isFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
-
-  if (authStatus === LoginStatus.Unknown || isFilmsLoading) {
-    return (
-      <LoadingSpinner />
-    );
-  }
-
+export default function App() {
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
@@ -41,7 +26,7 @@ export default function App({ myFilms }: AppProps): JSX.Element {
             path={AppRoute.MyList}
             element={
               <PrivateRoute>
-                <MyList myFilms={myFilms} />
+                <MyList />
               </PrivateRoute>
             }
           />
@@ -56,6 +41,7 @@ export default function App({ myFilms }: AppProps): JSX.Element {
           />
           <Route path={AppRoute.Player} element={<Player />} />
           <Route path="*" element={<Page404 />} />
+          <Route path={AppRoute.Error} element={<ErrorPage />} />
         </Routes>
       </HistoryRouter>
     </HelmetProvider>

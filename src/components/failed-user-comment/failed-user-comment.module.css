@@ -1,0 +1,25 @@
+.errorCommentContainer {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorCommentText {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.errorCommentLink {
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: opacity 0.3s;
+}
+
+.errorCommentLink:hover {
+  opacity: 0.7;
+}

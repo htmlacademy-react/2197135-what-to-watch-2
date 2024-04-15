@@ -3,10 +3,11 @@ import { LoginStatus } from '@/utils/const';
 import { AppRoute } from '@/utils/const';
 import { logoutAction } from '@/store/api-actions';
 import { Link } from 'react-router-dom';
+import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
 
 export default function UserBlock() {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector(getAuthStatus);
 
   return (
     <ul className="user-block">

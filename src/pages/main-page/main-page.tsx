@@ -3,19 +3,35 @@ import Header from '@/components/header/header';
 import FooterLogo from '@/components/footer-logo/footer-logo';
 import FilmsCatalog from '@/components/films-catalog/films-catalog';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { resetGenreAction } from '@/store/action';
 import UserBlock from '@/components/user-block/user-block';
+import { resetGenreAction } from '@/store/films-process/films-process-slice';
+import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
+import { getFilmsStatus } from '@/store/films-process/films-process-selectors';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import LoadingSpinner from '@/components/loading-spinner/loading-spinner';
+import { checkLoginAction, fetchFilmsAction } from '@/store/api-actions';
+import { redirectToRouteAction } from '@/store/action';
+import { AppRoute } from '@/utils/const';
 
 export default function MainPage(): JSX.Element {
-  const dispatch = useDispatch();
+  const authStatus = useAppSelector(getAuthStatus);
+  const filmsStatus = useAppSelector(getFilmsStatus);
 
-  useEffect(
-    () => () => {
-      dispatch(resetGenreAction());
-    },
-    [dispatch]
-  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetGenreAction());
+    dispatch(fetchFilmsAction());
+    dispatch(checkLoginAction());
+  }, [dispatch]);
+
+  if (!authStatus || filmsStatus.isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (filmsStatus.isError) {
+    dispatch(redirectToRouteAction(AppRoute.Error));
+  }
 
   return (
     <>
