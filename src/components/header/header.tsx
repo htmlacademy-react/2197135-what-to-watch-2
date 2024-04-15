@@ -9,7 +9,7 @@ type HeaderProps = {
 export default function Header({ className, children }: HeaderProps) {
   return (
     <header className={`page-header ${className}`}>
-      <Logo className='logo__link' />
+      <Logo className="logo__link" />
       {children}
     </header>
   );

@@ -1,7 +1,7 @@
 export type Review = {
   id: string;
   rating: number;
-  text: string;
+  comment: string;
   user: string;
-  date: string;
+  date: Date;
 }

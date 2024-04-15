@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Film } from '@/types/film';
 import FilmInfo from '../film-info/film-info';
 import { ActiveTabs } from '@/utils/const';
 import FilmNavigation from '../film-navigation/film-navigation';
+import { ChosenFilm } from '@/types/chosenFilm';
 
 type FilmNavigationProps = {
-  film: Film;
+  film: ChosenFilm;
 };
 
 export default function FilmDescription({

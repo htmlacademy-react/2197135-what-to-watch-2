@@ -1,33 +1,40 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
 import FilmHeroBlock from '@/components/film-heroblock/film-heroblock';
 import Page404 from '../page-404/page-404';
 import AddReviewForm from '@/components/add-review-form/add-review-form';
 import { useAppSelector } from '@/hooks';
+import { getFilm } from '@/store/films-process/films-process-selectors';
+import { getUserCommentStatus } from '@/store/user-slice/user-slice-selectors';
+import { FetchStatus } from '@/utils/const';
+import FailedUserComment from '@/components/failed-user-comment/failed-user-comment';
 
 export default function AddReview(): JSX.Element {
-  const { id } = useParams<{ id: string }>();
-  const films = useAppSelector((state) => state.films);
-
-  const film = films.find((item) => item.id === id);
+  const film = useAppSelector(getFilm);
+  const userCommentStatus = useAppSelector(getUserCommentStatus);
 
   if (!film) {
     return <Page404 />;
   }
 
   return (
-    <section className="film-card film-card--full">
+    <section
+      className="film-card film-card--full"
+      style={{ backgroundColor: film.backgroundColor }}
+    >
       <Helmet>
         <title>What to whatch.Add your review</title>
       </Helmet>
       <FilmHeroBlock
-        genre={film.genre}
-        image={film.previewImage}
+        backgroundPoster={film.backgroundImage}
         name={film.name}
-        year={film.year}
-        id={film.id}
+        genre={film.genre}
+        year={film.released}
       />
-      <AddReviewForm />
+      {userCommentStatus !== FetchStatus.Failed ? (
+        <AddReviewForm />
+      ) : (
+        <FailedUserComment id={film.id} />
+      )}
     </section>
   );
 }

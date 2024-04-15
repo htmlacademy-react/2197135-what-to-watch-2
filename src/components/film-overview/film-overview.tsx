@@ -7,14 +7,15 @@ type FilmOverviewProps = {
 export default function FilmOverview({
   filmOverview,
 }: FilmOverviewProps): JSX.Element {
-
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{filmOverview.rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{filmOverview.ratingLevel}</span>
-          <span className="film-rating__count">{filmOverview.ratingCount} ratings </span>
+          <span className="film-rating__count">
+            {filmOverview.ratingCount} ratings{' '}
+          </span>
         </p>
       </div>
       <div className="film-card__text">
@@ -23,7 +24,7 @@ export default function FilmOverview({
           <strong>Director: {filmOverview.director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring: {filmOverview.actors}</strong>
+          <strong>Starring: {filmOverview.actors.join(', ')}</strong>
         </p>
       </div>
     </>

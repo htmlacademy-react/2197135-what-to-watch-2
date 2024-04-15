@@ -13,7 +13,7 @@ export type Film = {
   director: string;
   actors: string[];
   description: string;
-  duration: string;
+  duration: number;
   reviews: Review[];
 };
 

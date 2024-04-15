@@ -1,9 +1,12 @@
 import { toast } from 'react-toastify';
 import { loginAction } from '@/store/api-actions';
 import { LoginData } from '@/types/login-data';
-import { useAppDispatch } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import cn from 'classnames';
+import { getIsLoginPendin } from '@/store/user-slice/user-slice-selectors';
+import Spinner from '../spinner/spinner';
+import { FetchStatus } from '@/utils/const';
 
 const loginErrorMessages = {
   LOGIN_IS_EMPTY: 'поля не могут быть пустые',
@@ -27,6 +30,8 @@ export default function SignInForm() {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
+
+  const isLoginPending = useAppSelector(getIsLoginPendin);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
@@ -109,7 +114,7 @@ export default function SignInForm() {
         </div>
         <div className="sign-in__submit">
           <button className="sign-in__btn" type="submit">
-            Sign in
+            {isLoginPending === FetchStatus.Pending ? <Spinner /> : 'Sign in'}
           </button>
         </div>
       </form>

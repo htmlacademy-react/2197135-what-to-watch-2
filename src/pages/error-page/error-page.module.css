@@ -1,0 +1,37 @@
+.errorPage__container {
+  background-image: linear-gradient(-180deg, #170202 0%, #0c0101 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.errorPage__header {
+  font-size: 3rem;
+  color: #eee5b5;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.errorPage__text {
+  font-size: 1.5rem;
+  color: #dfcf77;
+  text-align: center;
+}
+
+.errorPage__button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #eee5b5fb;
+  text-decoration: none;
+  color: #eee5b5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.errorPage__button:hover {
+  background-color: ();
+}
