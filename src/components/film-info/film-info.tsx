@@ -4,12 +4,16 @@ import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import UserReviews from '../user-reviews/user-reviews';
 import { ActiveTabs } from '@/utils/const';
-import { ChosenFilm } from '@/types/chosenFilm';
 import { useAppSelector } from '@/hooks';
-import { getFilmReviews } from '@/store/films-process/films-process-selectors';
+import { Film } from '@/types/film';
+import {
+  getFilmReviewsStatusSelector,
+  getFilmReviews,
+} from '@/store/reviews-slice/film-review-slice-selectors';
+import Spinner from '../spinner/spinner';
 
 type FilmInfoProps = {
-  film: ChosenFilm;
+  film: Film;
   activeTab: string;
 };
 
@@ -18,21 +22,22 @@ export default function FilmInfo({
   activeTab,
 }: FilmInfoProps): JSX.Element {
   const reviews = useAppSelector(getFilmReviews);
+  const reviewsStatus = useAppSelector(getFilmReviewsStatusSelector);
 
   const filmDetails: FilmDetailsType = {
     director: film.director,
     genre: film.genre,
-    year: film.released,
-    actors: film.starring,
-    duration: film.runTime,
+    released: film.released,
+    starring: film.starring,
+    runTime: film.runTime,
   };
 
   const filmOverview: FilmOverviewType = {
     rating: film.rating,
     ratingLevel: 'good',
-    ratingCount: film.scoreCount,
+    scoreCount: film.scoreCount,
     description: film.description,
-    actors: film.starring,
+    starring: film.starring,
     director: film.director,
   };
 
@@ -43,6 +48,9 @@ export default function FilmInfo({
       case ActiveTabs.Details:
         return <FilmDetails filmDetails={filmDetails} />;
       case ActiveTabs.Reviews:
+        if (reviewsStatus.isLoading) {
+          return <Spinner />;
+        }
         return <UserReviews reviews={reviews} />;
       default:
         return <FilmOverview filmOverview={filmOverview} />;

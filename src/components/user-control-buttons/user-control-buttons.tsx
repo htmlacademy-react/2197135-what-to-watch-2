@@ -1,22 +1,17 @@
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import Page404 from '@/pages/page-404/page-404';
-import { getFilm } from '@/store/films-process/films-process-selectors';
-import { resetUserCommentAction } from '@/store/user-slice/user-slice';
+import { useAppSelector } from '@/hooks';
 import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
 import { AppRoute, LoginStatus } from '@/utils/const';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 
-export function UserControlButtons(): JSX.Element {
+type UserControlButtonsProps = {
+  id: string;
+};
+
+export function UserControlButtons({
+  id,
+}: UserControlButtonsProps): JSX.Element {
   const navigate = useNavigate();
-  const film = useAppSelector(getFilm);
   const authStatus = useAppSelector(getAuthStatus);
-  const dispatch = useAppDispatch();
-
-  if (!film) {
-    return <Page404 />;
-  }
-
-  const { id } = film;
 
   const handleClick = () => {
     navigate(generatePath(AppRoute.Player, { id }));
@@ -43,7 +38,6 @@ export function UserControlButtons(): JSX.Element {
       </button>
       {authStatus === LoginStatus.Auth && (
         <Link
-          onClick={() => dispatch(resetUserCommentAction())}
           to={generatePath(AppRoute.AddReview, { id })}
           className="btn film-card__button"
         >

@@ -14,7 +14,7 @@ export default function FilmOverview({
         <p className="film-rating__meta">
           <span className="film-rating__level">{filmOverview.ratingLevel}</span>
           <span className="film-rating__count">
-            {filmOverview.ratingCount} ratings{' '}
+            {filmOverview.scoreCount} ratings{' '}
           </span>
         </p>
       </div>
@@ -24,7 +24,7 @@ export default function FilmOverview({
           <strong>Director: {filmOverview.director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring: {filmOverview.actors.join(', ')}</strong>
+          <strong>Starring: {filmOverview.starring.join(', ')}</strong>
         </p>
       </div>
     </>

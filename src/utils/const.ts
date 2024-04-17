@@ -6,7 +6,7 @@ export enum AppRoute {
   AddReview = '/films/:id/review',
   Player = '/player/:id',
   NotFound = '/*',
-  Error = '/error'
+  Error = '/error',
 }
 
 export enum LoginStatus {
@@ -27,22 +27,25 @@ export enum APIRoute {
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
 }
 
 export enum FetchStatus {
   Idle = 'Idle',
   Pending = 'Pending',
   Success = 'Success',
-  Failed = 'Failed'
+  Failed = 'Failed',
 }
 
 export enum NameSpace {
   User = 'USER',
   Films = 'FILMS',
+  Reviews = 'REVIEWS',
+  Notification = 'NOTIFICATION',
 }
 
 export const ALL_GENRES = 'All Genres';
 
 export const MAX_FILM_TO_SHOW = 8;
 
+export const MAX_SIMILAR_FILM_TO_SHOW = 4;

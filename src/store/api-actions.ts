@@ -7,10 +7,10 @@ import { LoginData } from '@/types/login-data';
 import { dropToken, saveToken } from '@/services/token';
 import { UserData } from '@/types/user-data';
 import { redirectToRouteAction } from './action';
-import { ChosenFilm } from '@/types/chosenFilm';
 import { Review } from '@/types/review';
 import { Comment } from '@/types/comment';
-import { toast } from 'react-toastify';
+import { generatePath } from 'react-router-dom';
+import { pushNotification } from './notification-slice/notification-slice';
 
 export const fetchFilmsAction = createAsyncThunk<
   Film[],
@@ -20,34 +20,102 @@ export const fetchFilmsAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/fetchFilms', async (_arg, { extra: api }) => {
-  const { data } = await api.get<Film[]>(APIRoute.Films);
-  return data;
+>('data/fetchFilms', async (_arg, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Film[]>(APIRoute.Films);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Cannot load films',
+      })
+    );
+    dispatch(redirectToRouteAction(AppRoute.Error));
+    throw err;
+  }
 });
 
 export const fetchChosenFilm = createAsyncThunk<
-  { chosenFilm: ChosenFilm; filmComments: Review[] },
-  ChosenFilm['id'],
+  Film,
+  Film['id'],
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('data/fetchChosenFilm', async (id, { extra: api }) => {
-  if (!id) {
-    throw 'error';
+>('data/fetchChosenFilm', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Film>(`${APIRoute.Films}/${id}`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Cannot load this film',
+      })
+    );
+    throw err;
   }
+});
 
-  const FilmResponse = await api.get<ChosenFilm>(`${APIRoute.Films}/${id}`);
-  const commentsResponse = await api.get<Review[]>(
-    `${APIRoute.Comments}/${id}`
-  );
-  const data = {
-    chosenFilm: FilmResponse.data,
-    filmComments: commentsResponse.data,
-  };
-  return data;
+export const fetchSimilarFilms = createAsyncThunk<
+  Film[],
+  Film['id'],
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('data/fetchSimilarFilms', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'warning',
+        message: 'Similar films were not found',
+      })
+    );
+    throw err;
+  }
+});
+
+export const fetchFilmReviews = createAsyncThunk<
+  Review[],
+  Film['id'],
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('data/fetchComments', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'warning',
+        message: 'Cannot laod film reviews',
+      })
+    );
+    throw err;
+  }
+});
+
+export const fetchPromoFilm = createAsyncThunk<
+  Film,
+  undefined,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('data/fetchPromoFilm', async (_arg, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Film>(APIRoute.Promo);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Cannot load promo film',
+      })
+    );
+    dispatch(redirectToRouteAction(AppRoute.Error));
+    throw err;
+  }
 });
 
 export const postUserCommentAction = createAsyncThunk<
   void,
-  { id: ChosenFilm['id']; comment: Comment },
+  { id: Film['id']; comment: Comment },
   {
     dispatch: AppDispatch;
     state: State;
@@ -56,18 +124,24 @@ export const postUserCommentAction = createAsyncThunk<
 >('user/postUserComment', async ({ id, comment }, { dispatch, extra: api }) => {
   try {
     await api.post<Comment>(`${APIRoute.Comments}/${id}`, comment);
-    dispatch(redirectToRouteAction(AppRoute.Film));
+    dispatch(
+      pushNotification({
+        type: 'success',
+        message: 'Your awesome comment has been sent',
+      })
+    );
+    dispatch(
+      redirectToRouteAction(generatePath(AppRoute.Film, { id }) as AppRoute)
+    );
   } catch (err) {
-    toast.warn('Something was broken');
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Something went wrong during sending comment',
+      })
+    );
+    throw err;
   }
-});
-
-export const checkCommentAction = createAsyncThunk<
-  void,
-  ChosenFilm['id'],
-  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('user/checkComment', async (id, { extra: api }) => {
-  await api.get(`${APIRoute.Comments}/${id}`);
 });
 
 export const checkLoginAction = createAsyncThunk<
@@ -78,8 +152,18 @@ export const checkLoginAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/checkLogin', async (_arg, { extra: api }) => {
-  await api.get(APIRoute.Login);
+>('user/checkLogin', async (_arg, { dispatch, extra: api }) => {
+  try {
+    await api.get(APIRoute.Login);
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'warning',
+        message: 'Cannot check authorization status',
+      })
+    );
+    throw err;
+  }
 });
 
 export const loginAction = createAsyncThunk<
@@ -91,11 +175,21 @@ export const loginAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/login', async ({ email, password }, { dispatch, extra: api }) => {
-  const {
-    data: { token },
-  } = await api.post<UserData>(APIRoute.Login, { email, password });
-  saveToken(token);
-  dispatch(redirectToRouteAction(AppRoute.Main));
+  try {
+    const {
+      data: { token },
+    } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(token);
+    dispatch(redirectToRouteAction(AppRoute.Main));
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Something went wrong during sending comment',
+      })
+    );
+    throw err;
+  }
 });
 
 export const logoutAction = createAsyncThunk<
@@ -106,7 +200,23 @@ export const logoutAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/logout', async (_arg, { extra: api }) => {
-  await api.delete(APIRoute.Logout);
-  dropToken();
+>('user/logout', async (_arg, { dispatch, extra: api }) => {
+  try {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    dispatch(
+      pushNotification({
+        type: 'success',
+        message: 'You have been logged out',
+      })
+    );
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Something wrong with logging out',
+      })
+    );
+    throw err;
+  }
 });

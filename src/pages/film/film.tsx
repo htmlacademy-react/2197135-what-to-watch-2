@@ -1,36 +1,36 @@
-import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import FilmHeroblock from '@/components/film-heroblock/film-heroblock';
 import FilmDescription from '@/components/film-description/film-description';
-import SortedFilms from '@/components/sorted-films/sorted-films';
 import { useAppSelector } from '@/hooks';
 import Footer from '@/components/footer/footer';
 import {
   getFilm,
-  getFilmStatus,
-  getFilms,
-} from '@/store/films-process/films-process-selectors';
-import Page404 from '../page-404/page-404';
-import { FetchStatus } from '@/utils/const';
+  getFilmStatusSelector,
+  getSimilarFilms,
+  getSimilarFilmsStatusSelector,
+} from '@/store/films-slice/films-slice-selectors';
 import LoadingSpinner from '@/components/loading-spinner/loading-spinner';
+import { useFilm } from '@/hooks/useFilm';
+import { useParams } from 'react-router-dom';
+import ErrorPage from '../error-page/error-page';
+import FilmsList from '@/components/films-list/films-list';
+import Spinner from '@/components/spinner/spinner';
 
 export default function Film(): JSX.Element {
-  const { id } = useParams<{ id: string | undefined }>();
-
-  const films = useAppSelector(getFilms);
-  const filmStatus = useAppSelector(getFilmStatus);
-
+  const { id } = useParams<{ id: string }>();
+  useFilm(id);
   const film = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const filmStatus = useAppSelector(getFilmStatusSelector);
+  const similarFilmsStatus = useAppSelector(getSimilarFilmsStatusSelector);
 
-  if (filmStatus === FetchStatus.Pending) {
+  if (filmStatus.isLoading) {
     return <LoadingSpinner />;
   }
 
   if (!film) {
-    return <Page404 />;
+    return <ErrorPage />;
   }
-
-  const sortedFilms = films.filter((currentFilm) => currentFilm.id !== id);
 
   return (
     <>
@@ -41,12 +41,12 @@ export default function Film(): JSX.Element {
         <Helmet>
           <title>What to whatch. Whatch your film</title>
         </Helmet>
-        <FilmHeroblock
-          backgroundPoster={film.backgroundImage}
-          name={film.name}
-          genre={film.genre}
-          year={film.released}
-        />
+        <div className="film-card__hero">
+          <FilmHeroblock
+            className={'page-header film-card__head'}
+            film={film}
+          />
+        </div>
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
@@ -62,7 +62,11 @@ export default function Film(): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <SortedFilms films={sortedFilms} genre={film.genre} />
+        {similarFilmsStatus.isError && <p>Cannot load similar films</p>}
+        {similarFilmsStatus.isLoading && <Spinner />}
+        {similarFilmsStatus.isSuccess && (
+          <FilmsList films={similarFilms} shorted />
+        )}
         <Footer />
       </div>
     </>
