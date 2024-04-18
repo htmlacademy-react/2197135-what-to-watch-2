@@ -38,9 +38,9 @@ export default function AddReview(): JSX.Element {
       style={{ backgroundColor: film.backgroundColor }}
     >
       <Helmet>
-        <title>What to whatch.Add your review</title>
+        <title>What to whatch -Add your review</title>
       </Helmet>
-      <FilmCardHeader />
+      <FilmCardHeader film={film} />
       <AddReviewForm id={film.id} />
     </section>
   );

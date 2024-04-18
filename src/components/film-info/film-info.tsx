@@ -7,10 +7,8 @@ import { ActiveTabs } from '@/utils/const';
 import { useAppSelector } from '@/hooks';
 import { Film } from '@/types/film';
 import {
-  getFilmReviewsStatusSelector,
   getFilmReviews,
 } from '@/store/reviews-slice/film-review-slice-selectors';
-import Spinner from '../spinner/spinner';
 
 type FilmInfoProps = {
   film: Film;
@@ -22,7 +20,6 @@ export default function FilmInfo({
   activeTab,
 }: FilmInfoProps): JSX.Element {
   const reviews = useAppSelector(getFilmReviews);
-  const reviewsStatus = useAppSelector(getFilmReviewsStatusSelector);
 
   const filmDetails: FilmDetailsType = {
     director: film.director,
@@ -48,9 +45,6 @@ export default function FilmInfo({
       case ActiveTabs.Details:
         return <FilmDetails filmDetails={filmDetails} />;
       case ActiveTabs.Reviews:
-        if (reviewsStatus.isLoading) {
-          return <Spinner />;
-        }
         return <UserReviews reviews={reviews} />;
       default:
         return <FilmOverview filmOverview={filmOverview} />;

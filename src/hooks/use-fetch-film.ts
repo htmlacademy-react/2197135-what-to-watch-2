@@ -11,7 +11,7 @@ import {
   resetSimilarFilms,
 } from '@/store/films-slice/films-slice';
 
-export const useFilm = (id: string | undefined) => {
+export const useFetchFilm = (id: string | undefined) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

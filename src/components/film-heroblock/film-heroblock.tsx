@@ -4,7 +4,7 @@ import UserBlock from '../user-block/user-block';
 import { UserControlButtons } from '../user-control-buttons/user-control-buttons';
 
 type FilmHeroblockProps = {
-  film: Film | null;
+  film: Film;
   className: string;
 };
 
@@ -12,9 +12,6 @@ export default function FilmHeroBlock({
   film,
   className,
 }: FilmHeroblockProps): JSX.Element {
-  if (!film) {
-    throw new Error('Film was not found');
-  }
 
   return (
     <>

@@ -10,7 +10,7 @@ import {
   getSimilarFilmsStatusSelector,
 } from '@/store/films-slice/films-slice-selectors';
 import LoadingSpinner from '@/components/loading-spinner/loading-spinner';
-import { useFilm } from '@/hooks/useFilm';
+import { useFetchFilm } from '@/hooks/use-fetch-film';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 import FilmsList from '@/components/films-list/films-list';
@@ -18,7 +18,7 @@ import Spinner from '@/components/spinner/spinner';
 
 export default function Film(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  useFilm(id);
+  useFetchFilm(id);
   const film = useAppSelector(getFilm);
   const similarFilms = useAppSelector(getSimilarFilms);
   const filmStatus = useAppSelector(getFilmStatusSelector);
@@ -39,7 +39,7 @@ export default function Film(): JSX.Element {
         style={{ backgroundColor: film.backgroundColor }}
       >
         <Helmet>
-          <title>What to whatch. Whatch your film</title>
+          <title>What to whatch - Whatch your film</title>
         </Helmet>
         <div className="film-card__hero">
           <FilmHeroblock

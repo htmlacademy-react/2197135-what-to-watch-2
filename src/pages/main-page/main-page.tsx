@@ -6,7 +6,6 @@ import {
   resetFilmAction,
   resetGenreAction,
 } from '@/store/films-slice/films-slice';
-import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
 import {
   getFilmsStatusSelector,
   getPromoFilm,
@@ -20,9 +19,9 @@ import {
   fetchPromoFilm,
 } from '@/store/api-actions';
 import FilmHeroBlock from '@/components/film-heroblock/film-heroblock';
+import ErrorPage from '../error-page/error-page';
 
 export default function MainPage(): JSX.Element {
-  const authStatus = useAppSelector(getAuthStatus);
   const filmsStatus = useAppSelector(getFilmsStatusSelector);
   const promoFilm = useAppSelector(getPromoFilm);
   const promoFilmStatus = useAppSelector(getPromoFilmStatusSelector);
@@ -37,14 +36,18 @@ export default function MainPage(): JSX.Element {
     dispatch(resetFilmAction());
   }, [dispatch]);
 
-  if (!authStatus || filmsStatus.isLoading || promoFilmStatus.isLoading) {
+  if (filmsStatus.isLoading || promoFilmStatus.isLoading) {
     return <LoadingSpinner />;
+  }
+
+  if(!promoFilm) {
+    return <ErrorPage />;
   }
 
   return (
     <>
       <Helmet>
-        <title>What to whatch. Main page</title>
+        <title>What to whatch - Main page</title>
       </Helmet>
       <section className="film-card">
         <FilmHeroBlock className={'page-header'} film={promoFilm} />

@@ -5,6 +5,7 @@ import { Comment } from '@/types/comment';
 import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
 import Spinner from '../spinner/spinner';
 import { getPostCommentStatusSelector } from '@/store/reviews-slice/film-review-slice-selectors';
+import classes from './add-review-form.module.css';
 
 const COMMENT_LENGTH = {
   min: 50,
@@ -17,6 +18,7 @@ const notValidMessage = {
   commentLong: 'Sorry bro, your comment is too long',
   ratingEmpty: 'Sorry bro, rating cannot be empty',
 };
+
 
 type AddReviewFormProps = {
   id: string;
@@ -45,16 +47,13 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
   const isNotTooLong = (value: string) =>
     value.trim().length <= COMMENT_LENGTH.max;
 
-  let isFormVaild = false;
+  const validationRules = {
+    notEmpty: (value: Comment) => !isEmpty(formData.comment) && !isEmptyRating(value.rating),
+    notTooLong: (value: Comment) => isNotTooLong(value.comment),
+    notToShort: (value: Comment) => isNotShort(value.comment)
+  };
 
-  if (
-    !isEmpty(formData.comment) &&
-    !isEmptyRating(formData.rating) &&
-    isNotShort(formData.comment) &&
-    isNotTooLong(formData.comment)
-  ) {
-    isFormVaild = true;
-  }
+  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](formData));
 
   const ratingArray = Array.from({ length: 10 }, (_, index) => 10 - index);
 
@@ -75,7 +74,7 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
-    if (isFormVaild) {
+    if (isValid) {
       onSubmit(formData);
     }
   }
@@ -115,7 +114,7 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
           />
           <div className="add-review__submit">
             <button
-              disabled={!isFormVaild || postCommentStatus.isLoading}
+              disabled={!isValid || postCommentStatus.isLoading}
               className="add-review__btn"
               type="submit"
             >
@@ -131,13 +130,13 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
         <p style={{ color: 'black' }}>{notValidMessage.ratingEmpty}</p>
       )}
       {!isNotShort(formData.comment) && (
-        <p style={{ color: 'black' }}>{notValidMessage.commentShort}</p>
+        <p className={classes.validationMessage}>{notValidMessage.commentShort}</p>
       )}
       {!isNotTooLong(formData.comment) && (
-        <p style={{ color: 'black' }}>{notValidMessage.commentLong}</p>
+        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
       )}
       {!isNotTooLong(formData.comment) && (
-        <p style={{ color: 'black' }}>{notValidMessage.commentLong}</p>
+        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
       )}
     </div>
   );

@@ -185,7 +185,7 @@ export const loginAction = createAsyncThunk<
     dispatch(
       pushNotification({
         type: 'error',
-        message: 'Something went wrong during sending comment',
+        message: 'Something went wrong during logging in',
       })
     );
     throw err;

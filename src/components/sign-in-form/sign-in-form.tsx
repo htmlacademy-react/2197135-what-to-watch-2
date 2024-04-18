@@ -40,16 +40,13 @@ export default function SignInForm() {
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  let isFormValid = false;
+  const validationRules = {
+    notEmpty: (value: LoginData) => isNotEmpty(value.email) && isNotEmpty(value.password),
+    validEmail: (value: LoginData) => isEmail(value.email),
+    validPassword: (value: LoginData) => isValidPassword(value.password)
+  };
 
-  if (
-    isNotEmpty(loginData.email) &&
-    isNotEmpty(loginData.password) &&
-    isEmail(loginData.email) &&
-    isValidPassword(loginData.password)
-  ) {
-    isFormValid = true;
-  }
+  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](loginData));
 
   const showErrorMessage = () => {
     const errors: { [key: string]: string } = {};
@@ -78,7 +75,7 @@ export default function SignInForm() {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (!isFormValid) {
+    if (!isValid) {
       showErrorMessage();
       return;
     }
@@ -90,7 +87,7 @@ export default function SignInForm() {
     <div className="sign-in user-page__content">
       <form action="" className="sign-in__form" onSubmit={handleSubmit}>
         <div className="sign-in__message">
-          {!isFormValid &&
+          {!isValid &&
             Object.values(errorMessages).map((errorMessage) => (
               <div className="sign-in__message" key={errorMessage}>
                 <p>{errorMessage}</p>

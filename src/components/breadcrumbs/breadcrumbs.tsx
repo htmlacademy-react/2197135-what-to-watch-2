@@ -1,16 +1,13 @@
-import { useAppSelector } from '@/hooks';
-import { getFilm } from '@/store/films-slice/films-slice-selectors';
 import { AppRoute } from '@/utils/const';
 import { Link, generatePath } from 'react-router-dom';
 
-export default function Breadcrumbs() {
-  const film = useAppSelector(getFilm);
+type BreadcrumbsProps = {
+  id: string;
+  name: string;
+};
 
-  if (!film) {
-    return;
-  }
+export default function Breadcrumbs({id, name}: BreadcrumbsProps): JSX.Element {
 
-  const { id } = film;
 
   return (
     <nav className="breadcrumbs">
@@ -20,7 +17,7 @@ export default function Breadcrumbs() {
             to={generatePath(AppRoute.Film, { id })}
             className="breadcrumbs__link"
           >
-            {film.name}
+            {name}
           </Link>
         </li>
         <li className="breadcrumbs__item">

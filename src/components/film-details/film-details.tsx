@@ -20,7 +20,7 @@ export default function FilmDetails({
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {filmDetails.starring.map((actor, index) => (
-              <span key={crypto.randomUUID()}>
+              <span key={actor}>
                 {actor}
                 {index !== filmDetails.starring.length - 1 && <br />}
               </span>

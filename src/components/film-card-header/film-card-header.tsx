@@ -1,22 +1,20 @@
-import { useAppSelector } from '@/hooks';
 import Header from '../header/header';
 import UserBlock from '../user-block/user-block';
-import { getFilm } from '@/store/films-slice/films-slice-selectors';
-import Page404 from '@/pages/page-404/page-404';
+import Breadcrumbs from '../breadcrumbs/breadcrumbs';
+import { Film } from '@/types/film';
 
-export default function FilmCardHeader() {
-  const film = useAppSelector(getFilm);
+type FilmCardHeaderProps = {
+  film: Film;
+};
 
-  if (!film) {
-    return <Page404 />;
-  }
+export default function FilmCardHeader({film}: FilmCardHeaderProps):JSX.Element {
 
   return (
     <div className="film-card__header">
       <div className="film-card__bg">
         <img src={film.backgroundImage} alt={film.name} />
       </div>
-      <Header className={'page-header'} hasBreadcrumbs>
+      <Header className={'page-header'} breadcrumbs={<Breadcrumbs id={film.id} name={film.name} />}>
         <UserBlock />
       </Header>
       <div className="film-card__poster film-card__poster--small">
