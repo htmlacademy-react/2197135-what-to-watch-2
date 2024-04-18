@@ -3,13 +3,19 @@ import Logo from '../logo/logo';
 
 type HeaderProps = {
   children?: ReactNode;
+  breadcrumbs?: ReactNode;
   className: string;
 };
 
-export default function Header({ className, children }: HeaderProps) {
+export default function Header({
+  className,
+  breadcrumbs,
+  children,
+}: HeaderProps) {
   return (
-    <header className={`page-header ${className}`}>
+    <header className={className}>
       <Logo className="logo__link" />
+      {breadcrumbs}
       {children}
     </header>
   );

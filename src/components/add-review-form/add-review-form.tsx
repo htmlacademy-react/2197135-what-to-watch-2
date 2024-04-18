@@ -1,33 +1,35 @@
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import ErrorPage from '@/pages/error-page/error-page';
-import {
-  checkCommentAction,
-  fetchChosenFilm,
-  postUserCommentAction,
-} from '@/store/api-actions';
-import { getUserCommentStatus } from '@/store/user-slice/user-slice-selectors';
+import { postUserCommentAction } from '@/store/api-actions';
 import { Comment } from '@/types/comment';
-import { FetchStatus } from '@/utils/const';
 import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { useParams } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
+import { getPostCommentStatusSelector } from '@/store/reviews-slice/film-review-slice-selectors';
+import classes from './add-review-form.module.css';
 
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 400;
+const COMMENT_LENGTH = {
+  min: 50,
+  max: 400,
+} as const;
 
 const notValidMessage = {
   empty: 'Comment cannot be empty bro, sorry :(',
   commentShort: 'Be awesome. Write something more than 50 characters :)',
   commentLong: 'Sorry bro, your comment is too long',
+  ratingEmpty: 'Sorry bro, rating cannot be empty',
 };
 
-export default function AddReviewForm() {
-  const { id } = useParams<{ id: string }>();
+
+type AddReviewFormProps = {
+  id: string;
+};
+
+export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const userCommentStatus = useAppSelector(getUserCommentStatus);
+  const postCommentStatus = useAppSelector(getPostCommentStatusSelector);
 
   const [formData, setFormData] = useState({
-    rating: 5,
+    rating: null,
     comment: '',
   });
 
@@ -35,18 +37,23 @@ export default function AddReviewForm() {
     return <ErrorPage />;
   }
 
-  const isEmpty = (value: string) => value.trim() !== '';
+  const isEmpty = (value: string) => value.trim() === '';
+
+  const isEmptyRating = (value: number | null) => value === null;
 
   const isNotShort = (value: string) =>
-    value.trim().length >= MIN_COMMENT_LENGTH;
+    value.trim().length >= COMMENT_LENGTH.min;
 
   const isNotTooLong = (value: string) =>
-    value.trim().length <= MAX_COMMENT_LENGTH;
+    value.trim().length <= COMMENT_LENGTH.max;
 
-  const isValid =
-    isEmpty(formData.comment) &&
-    isNotShort(formData.comment) &&
-    isNotTooLong(formData.comment);
+  const validationRules = {
+    notEmpty: (value: Comment) => !isEmpty(formData.comment) && !isEmptyRating(value.rating),
+    notTooLong: (value: Comment) => isNotTooLong(value.comment),
+    notToShort: (value: Comment) => isNotShort(value.comment)
+  };
+
+  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](formData));
 
   const ratingArray = Array.from({ length: 10 }, (_, index) => 10 - index);
 
@@ -62,16 +69,13 @@ export default function AddReviewForm() {
 
   const onSubmit = (comment: Comment) => {
     dispatch(postUserCommentAction({ id, comment }));
-    dispatch(checkCommentAction(id));
   };
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
+
     if (isValid) {
       onSubmit(formData);
-      if (id && userCommentStatus === FetchStatus.Success) {
-        dispatch(fetchChosenFilm(id));
-      }
     }
   }
 
@@ -101,6 +105,7 @@ export default function AddReviewForm() {
         <div className="add-review__text">
           <textarea
             className="add-review__textarea"
+            disabled={postCommentStatus.isLoading}
             name="comment"
             id="comment"
             placeholder="Review text"
@@ -109,23 +114,29 @@ export default function AddReviewForm() {
           />
           <div className="add-review__submit">
             <button
-              disabled={!isValid && userCommentStatus === FetchStatus.Pending}
+              disabled={!isValid || postCommentStatus.isLoading}
               className="add-review__btn"
               type="submit"
             >
-              {userCommentStatus === FetchStatus.Pending ? <Spinner /> : 'Post'}
+              {postCommentStatus.isLoading ? <Spinner /> : 'Post'}
             </button>
           </div>
         </div>
       </form>
-      {!isEmpty(formData.comment) && (
+      {isEmpty(formData.comment) && (
         <p style={{ color: 'black' }}>{notValidMessage.empty}</p>
       )}
+      {isEmptyRating(formData.rating) && (
+        <p style={{ color: 'black' }}>{notValidMessage.ratingEmpty}</p>
+      )}
       {!isNotShort(formData.comment) && (
-        <p style={{ color: 'black' }}>{notValidMessage.commentShort}</p>
+        <p className={classes.validationMessage}>{notValidMessage.commentShort}</p>
       )}
       {!isNotTooLong(formData.comment) && (
-        <p style={{ color: 'black' }}>{notValidMessage.commentLong}</p>
+        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
+      )}
+      {!isNotTooLong(formData.comment) && (
+        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
       )}
     </div>
   );

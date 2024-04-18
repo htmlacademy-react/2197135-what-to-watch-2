@@ -7,7 +7,7 @@ export default function SignIn() {
   return (
     <div className="user-page">
       <Helmet>
-        <title>What to whatch.Log in</title>
+        <title>What to watch. Sign in</title>
       </Helmet>
       <Header className={'user-page__head'}>
         <h1 className="page-title user-page__title">Sign in</h1>

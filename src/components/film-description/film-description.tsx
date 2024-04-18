@@ -2,10 +2,10 @@ import { useState } from 'react';
 import FilmInfo from '../film-info/film-info';
 import { ActiveTabs } from '@/utils/const';
 import FilmNavigation from '../film-navigation/film-navigation';
-import { ChosenFilm } from '@/types/chosenFilm';
+import { Film } from '@/types/film';
 
 type FilmNavigationProps = {
-  film: ChosenFilm;
+  film: Film;
 };
 
 export default function FilmDescription({

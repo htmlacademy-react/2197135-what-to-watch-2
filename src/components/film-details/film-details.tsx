@@ -19,10 +19,10 @@ export default function FilmDetails({
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {filmDetails.actors.map((actor, index) => (
-              <span key={crypto.randomUUID()}>
+            {filmDetails.starring.map((actor, index) => (
+              <span key={actor}>
                 {actor}
-                {index !== filmDetails.actors.length - 1 && <br />}
+                {index !== filmDetails.starring.length - 1 && <br />}
               </span>
             ))}
           </span>
@@ -32,7 +32,7 @@ export default function FilmDetails({
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
           <span className="film-card__details-value">
-            {filmDetails.duration}
+            {filmDetails.runTime}
           </span>
         </p>
         <p className="film-card__details-item">
@@ -41,7 +41,9 @@ export default function FilmDetails({
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{filmDetails.year}</span>
+          <span className="film-card__details-value">
+            {filmDetails.released}
+          </span>
         </p>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/hooks';
-import { showMoreAction } from '@/store/films-process/films-process-slice';
+import { showMoreAction } from '@/store/films-slice/films-slice';
 
 export default function ShowMoreButton() {
   const dispatch = useAppDispatch();

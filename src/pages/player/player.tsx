@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Page404 from '../page-404/page-404';
 import { AppRoute } from '@/utils/const';
 import { useAppSelector } from '@/hooks';
-import { getFilm } from '@/store/films-process/films-process-selectors';
+import { getFilm } from '@/store/films-slice/films-slice-selectors';
 import { useNavigate } from 'react-router-dom';
 
 export default function Player(): JSX.Element {
@@ -22,7 +22,7 @@ export default function Player(): JSX.Element {
       <video
         src={chosenFilm.videoLink}
         className="player__video"
-        poster={chosenFilm.posterImage}
+        poster={chosenFilm.previewImage}
       />
       <button
         onClick={() => navigate(AppRoute.Main)}

@@ -27,7 +27,9 @@ export default function SignInForm() {
     email: '',
     password: '',
   });
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [errorMessages, setErrorMessages] = useState<{ [key: string]: string }>(
+    {}
+  );
 
   const dispatch = useAppDispatch();
 
@@ -38,27 +40,29 @@ export default function SignInForm() {
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const isValid =
-    isNotEmpty(loginData.email) &&
-    isNotEmpty(loginData.password) &&
-    isEmail(loginData.email) &&
-    isValidPassword(loginData.password);
+  const validationRules = {
+    notEmpty: (value: LoginData) => isNotEmpty(value.email) && isNotEmpty(value.password),
+    validEmail: (value: LoginData) => isEmail(value.email),
+    validPassword: (value: LoginData) => isValidPassword(value.password)
+  };
+
+  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](loginData));
 
   const showErrorMessage = () => {
-    const errors = [];
+    const errors: { [key: string]: string } = {};
     if (!isNotEmpty(loginData.email) || !isNotEmpty(loginData.password)) {
       toast.warn(loginErrorMessages.LOGIN_IS_EMPTY);
-      errors.push(loginErrorMessages.LOGIN_IS_EMPTY);
+      errors['email'] = loginErrorMessages.LOGIN_IS_EMPTY;
     }
 
     if (!isEmail(loginData.email)) {
       toast.warn(loginErrorMessages.LOGIN_IS_NOT_EMAIL);
-      errors.push(loginErrorMessages.LOGIN_IS_NOT_EMAIL);
+      errors['email'] = loginErrorMessages.LOGIN_IS_NOT_EMAIL;
     }
 
     if (!isValidPassword(loginData.password)) {
       toast.warn(loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD);
-      errors.push(loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD);
+      errors['password'] = loginErrorMessages.LOGIN_IS_NOT_VALID_PASSWORD;
     }
 
     setErrorMessages(errors);
@@ -70,31 +74,32 @@ export default function SignInForm() {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (isValid) {
-      onSubmit(loginData);
-    } else {
+
+    if (!isValid) {
       showErrorMessage();
+      return;
     }
+    setErrorMessages({});
+    onSubmit(loginData);
   };
 
   return (
     <div className="sign-in user-page__content">
       <form action="" className="sign-in__form" onSubmit={handleSubmit}>
-        {!isValid && (
-          <div className="sign-in__message">
-            {errorMessages.map((errorMessage) => (
+        <div className="sign-in__message">
+          {!isValid &&
+            Object.values(errorMessages).map((errorMessage) => (
               <div className="sign-in__message" key={errorMessage}>
                 <p>{errorMessage}</p>
               </div>
             ))}
-          </div>
-        )}
+        </div>
         <div className="sign-in__fields">
           {Object.entries(loginData).map(([key, value]) => (
             <div
               key={key}
               className={cn('sign-in__field', {
-                'sign-in__field--error': !isValid,
+                'sign-in__field--error': errorMessages[key],
               })}
             >
               <input

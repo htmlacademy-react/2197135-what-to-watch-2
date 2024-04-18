@@ -5,29 +5,38 @@ import {
   NameSpace,
 } from '@/utils/const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchChosenFilm, fetchFilmsAction } from '../api-actions';
+import {
+  fetchChosenFilm,
+  fetchFilmsAction,
+  fetchPromoFilm,
+  fetchSimilarFilms,
+} from '../api-actions';
 import { Film } from '@/types/film';
-import { ChosenFilm } from '@/types/chosenFilm';
-import { Review } from '@/types/review';
 
-type FilmsProcess = {
+type FilmsSlice = {
   films: Film[] | [];
   filmsStatus: FetchStatus;
-  film: ChosenFilm | null;
+  promoFilm: Film | null;
+  promoFilmStatus: FetchStatus;
+  film: Film | null;
   filmStatus: FetchStatus;
+  similarFilms: Film[] | [];
+  similarFilmsStatus: FetchStatus;
   activeGenre: string;
   filmsShown: number;
-  filmReviews: Review[] | [];
 };
 
-const initialState: FilmsProcess = {
+const initialState: FilmsSlice = {
   films: [],
   filmsStatus: FetchStatus.Idle,
+  promoFilm: null,
+  promoFilmStatus: FetchStatus.Idle,
   film: null,
   filmStatus: FetchStatus.Idle,
+  similarFilms: [],
+  similarFilmsStatus: FetchStatus.Idle,
   activeGenre: ALL_GENRES,
   filmsShown: MAX_FILM_TO_SHOW,
-  filmReviews: [],
 };
 
 export const filmSlice = createSlice({
@@ -47,6 +56,12 @@ export const filmSlice = createSlice({
     resetShownFilmsAction: (state) => {
       state.filmsShown = MAX_FILM_TO_SHOW;
     },
+    resetFilmAction: (state) => {
+      state.film = null;
+    },
+    resetSimilarFilms: (state) => {
+      state.similarFilms = [];
+    },
   },
   extraReducers(builder) {
     builder
@@ -60,6 +75,16 @@ export const filmSlice = createSlice({
         state.filmsStatus = FetchStatus.Success;
         state.films = action.payload;
       })
+      .addCase(fetchPromoFilm.rejected, (state) => {
+        state.promoFilmStatus = FetchStatus.Failed;
+      })
+      .addCase(fetchPromoFilm.pending, (state) => {
+        state.promoFilmStatus = FetchStatus.Pending;
+      })
+      .addCase(fetchPromoFilm.fulfilled, (state, action) => {
+        state.promoFilm = action.payload;
+        state.promoFilmStatus = FetchStatus.Success;
+      })
       .addCase(fetchChosenFilm.rejected, (state) => {
         state.filmStatus = FetchStatus.Failed;
       })
@@ -67,9 +92,18 @@ export const filmSlice = createSlice({
         state.filmStatus = FetchStatus.Pending;
       })
       .addCase(fetchChosenFilm.fulfilled, (state, action) => {
-        state.film = action.payload.chosenFilm;
-        state.filmReviews = action.payload.filmComments;
         state.filmStatus = FetchStatus.Success;
+        state.film = action.payload;
+      })
+      .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
+        state.similarFilmsStatus = FetchStatus.Success;
+        state.similarFilms = action.payload;
+      })
+      .addCase(fetchSimilarFilms.pending, (state) => {
+        state.similarFilmsStatus = FetchStatus.Pending;
+      })
+      .addCase(fetchSimilarFilms.rejected, (state) => {
+        state.similarFilmsStatus = FetchStatus.Failed;
       });
   },
 });
@@ -79,4 +113,6 @@ export const {
   resetGenreAction,
   showMoreAction,
   resetShownFilmsAction,
+  resetFilmAction,
+  resetSimilarFilms,
 } = filmSlice.actions;

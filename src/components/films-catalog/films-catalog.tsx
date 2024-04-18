@@ -8,11 +8,11 @@ import {
   getActiveGenre,
   getFilms,
   getFilmsShown,
-} from '@/store/films-process/films-process-selectors';
+} from '@/store/films-slice/films-slice-selectors';
 import {
   chooseGenreAction,
   resetShownFilmsAction,
-} from '@/store/films-process/films-process-slice';
+} from '@/store/films-slice/films-slice';
 
 export default function FilmsCatalog() {
   const activeGenre = useAppSelector(getActiveGenre);
