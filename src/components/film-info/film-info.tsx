@@ -6,9 +6,7 @@ import UserReviews from '../user-reviews/user-reviews';
 import { ActiveTabs } from '@/utils/const';
 import { useAppSelector } from '@/hooks';
 import { Film } from '@/types/film';
-import {
-  getFilmReviews,
-} from '@/store/reviews-slice/film-review-slice-selectors';
+import { getFilmReviews } from '@/store/reviews-slice/film-review-slice-selectors';
 
 type FilmInfoProps = {
   film: Film;

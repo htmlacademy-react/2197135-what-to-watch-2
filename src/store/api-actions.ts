@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, AppRoute } from '@/utils/const';
+import { APIRoute, AppRoute, FilmStatus } from '@/utils/const';
 import { Film } from '@/types/film';
 import { AppDispatch, State } from '@/types/state';
 import { LoginData } from '@/types/login-data';
@@ -112,6 +112,44 @@ export const fetchPromoFilm = createAsyncThunk<
     throw err;
   }
 });
+
+export const fetchFavoriteFilms = createAsyncThunk<
+  Film[],
+  undefined,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('data/fetchFavoriteFilms', async (_arg, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Film[]>(APIRoute.Favorite);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({ type: 'error', message: 'Cannot load favorite films' })
+    );
+    throw err;
+  }
+});
+
+export const toggleFilmFavoriteAction = createAsyncThunk<
+  { id: Film['id'] },
+  { id: Film['id']; favoriteStatus: FilmStatus },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'data/addFavoriteFilm',
+  async ({ id, favoriteStatus }, { dispatch, extra: api }) => {
+    try {
+      await api.post(`${APIRoute.Favorite}/${id}/${favoriteStatus}`);
+      return { id };
+    } catch (err) {
+      dispatch(
+        pushNotification({
+          type: 'error',
+          message: 'Cannot add film to favorite',
+        })
+      );
+      throw err;
+    }
+  }
+);
 
 export const postUserCommentAction = createAsyncThunk<
   void,

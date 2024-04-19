@@ -6,9 +6,10 @@ type BreadcrumbsProps = {
   name: string;
 };
 
-export default function Breadcrumbs({id, name}: BreadcrumbsProps): JSX.Element {
-
-
+export default function Breadcrumbs({
+  id,
+  name,
+}: BreadcrumbsProps): JSX.Element {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">

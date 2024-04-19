@@ -40,7 +40,7 @@ export default function MainPage(): JSX.Element {
     return <LoadingSpinner />;
   }
 
-  if(!promoFilm) {
+  if (!promoFilm) {
     return <ErrorPage />;
   }
 

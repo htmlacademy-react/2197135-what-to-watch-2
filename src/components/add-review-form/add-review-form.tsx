@@ -19,7 +19,6 @@ const notValidMessage = {
   ratingEmpty: 'Sorry bro, rating cannot be empty',
 };
 
-
 type AddReviewFormProps = {
   id: string;
 };
@@ -48,12 +47,15 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
     value.trim().length <= COMMENT_LENGTH.max;
 
   const validationRules = {
-    notEmpty: (value: Comment) => !isEmpty(formData.comment) && !isEmptyRating(value.rating),
+    notEmpty: (value: Comment) =>
+      !isEmpty(formData.comment) && !isEmptyRating(value.rating),
     notTooLong: (value: Comment) => isNotTooLong(value.comment),
-    notToShort: (value: Comment) => isNotShort(value.comment)
+    notToShort: (value: Comment) => isNotShort(value.comment),
   };
 
-  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](formData));
+  const isValid = Object.keys(validationRules).every((rule) =>
+    validationRules[rule as keyof typeof validationRules](formData)
+  );
 
   const ratingArray = Array.from({ length: 10 }, (_, index) => 10 - index);
 
@@ -130,13 +132,19 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
         <p style={{ color: 'black' }}>{notValidMessage.ratingEmpty}</p>
       )}
       {!isNotShort(formData.comment) && (
-        <p className={classes.validationMessage}>{notValidMessage.commentShort}</p>
+        <p className={classes.validationMessage}>
+          {notValidMessage.commentShort}
+        </p>
       )}
       {!isNotTooLong(formData.comment) && (
-        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
+        <p className={classes.validationMessage}>
+          {notValidMessage.commentLong}
+        </p>
       )}
       {!isNotTooLong(formData.comment) && (
-        <p className={classes.validationMessage}>{notValidMessage.commentLong}</p>
+        <p className={classes.validationMessage}>
+          {notValidMessage.commentLong}
+        </p>
       )}
     </div>
   );

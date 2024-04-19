@@ -65,7 +65,10 @@ export default function Film(): JSX.Element {
         {similarFilmsStatus.isError && <p>Cannot load similar films</p>}
         {similarFilmsStatus.isLoading && <Spinner />}
         {similarFilmsStatus.isSuccess && (
-          <FilmsList films={similarFilms} shorted />
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <FilmsList films={similarFilms} shorted />
+          </section>
         )}
         <Footer />
       </div>

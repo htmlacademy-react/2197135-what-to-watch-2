@@ -12,7 +12,6 @@ export default function FilmHeroBlock({
   film,
   className,
 }: FilmHeroblockProps): JSX.Element {
-
   return (
     <>
       <div className="film-card__bg">
@@ -30,7 +29,7 @@ export default function FilmHeroBlock({
             <span className="film-card__genre">{film.genre}</span>
             <span className="film-card__year">{film.released}</span>
           </p>
-          <UserControlButtons id={film.id} />
+          <UserControlButtons id={film.id} isFavorite={film.isFavorite} />
         </div>
       </div>
     </>
