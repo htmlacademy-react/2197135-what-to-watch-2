@@ -130,7 +130,7 @@ export const fetchFavoriteFilms = createAsyncThunk<
 });
 
 export const toggleFilmFavoriteAction = createAsyncThunk<
-  { id: Film['id'] },
+  void,
   { id: Film['id']; favoriteStatus: FilmStatus },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >(
@@ -138,12 +138,12 @@ export const toggleFilmFavoriteAction = createAsyncThunk<
   async ({ id, favoriteStatus }, { dispatch, extra: api }) => {
     try {
       await api.post(`${APIRoute.Favorite}/${id}/${favoriteStatus}`);
-      return { id };
+      dispatch(fetchFavoriteFilms());
     } catch (err) {
       dispatch(
         pushNotification({
           type: 'error',
-          message: 'Cannot add film to favorite',
+          message: 'Something went wrong when adding / removing favorite film',
         })
       );
       throw err;

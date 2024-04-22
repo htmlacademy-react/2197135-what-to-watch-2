@@ -41,12 +41,17 @@ export default function SignInForm() {
   };
 
   const validationRules = {
-    notEmpty: (value: LoginData) => isNotEmpty(value.email) && isNotEmpty(value.password),
+    notEmpty: (value: LoginData) =>
+      isNotEmpty(value.email) && isNotEmpty(value.password),
     validEmail: (value: LoginData) => isEmail(value.email),
-    validPassword: (value: LoginData) => isValidPassword(value.password)
+    validPassword: (value: LoginData) => isValidPassword(value.password),
   };
 
-  const isValid = Object.keys(validationRules).every((rule) => validationRules[rule as keyof typeof validationRules](loginData));
+  type ValidationRulesKeys = keyof typeof validationRules;
+
+  const isValid = Object.keys(validationRules).every((rule) =>
+    validationRules[rule as ValidationRulesKeys](loginData)
+  );
 
   const showErrorMessage = () => {
     const errors: { [key: string]: string } = {};

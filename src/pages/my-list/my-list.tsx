@@ -1,9 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/header/header';
 import Footer from '@/components/footer/footer';
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { fetchFavoriteFilms } from '@/store/api-actions';
-import { useEffect } from 'react';
+import { useAppSelector } from '@/hooks';
 import FilmsList from '@/components/films-list/films-list';
 import {
   getFavoriteFilms,
@@ -13,11 +11,6 @@ import ErrorPage from '../error-page/error-page';
 import UserBlock from '@/components/user-block/user-block';
 
 export default function MyList() {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchFavoriteFilms());
-  }, [dispatch]);
-
   const favoriteFilms = useAppSelector(getFavoriteFilms);
   const favoriteFilmsStatus = useAppSelector(getFavoriteFilmsStatusSelectors);
 

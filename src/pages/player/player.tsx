@@ -29,8 +29,7 @@ export default function Player(): JSX.Element {
 
     if (videoElement) {
       const handleTimeUpdate = () => {
-        setCurrentTime(videoElement.currentTime);
-        setDuration(videoElement.duration);
+        setCurrentTime(Math.round(videoElement.currentTime));
       };
 
       const handleLoadedMetaData = () => {
@@ -97,11 +96,7 @@ export default function Player(): JSX.Element {
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const moveOffsetX = moveEvent.clientX - rect.left;
       let movePercentage = moveOffsetX / rect.width;
-      if (movePercentage < 0) {
-        movePercentage = 0;
-      } else if (movePercentage > 1) {
-        movePercentage = 1;
-      }
+      movePercentage = Math.min(1, Math.max(0, movePercentage));
       const newMoveCurrentTime = duration * movePercentage;
       setCurrentTime(newMoveCurrentTime);
     };
@@ -149,11 +144,11 @@ export default function Player(): JSX.Element {
         <PlayerControls
           duration={duration}
           currentTime={currentTime}
-          handleToggler={handleTogglerMouseDown}
-          handleFullScreen={handleFullScreen}
+          onTogglerDown={handleTogglerMouseDown}
+          onFullScreenClick={handleFullScreen}
           isPlaying={isPlaying}
           filmName={chosenFilm.name}
-          handlePlayPauseClick={handlePlayPauseClick}
+          onPlayPauseClick={handlePlayPauseClick}
         />
       </div>
     </>

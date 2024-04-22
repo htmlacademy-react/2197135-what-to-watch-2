@@ -53,8 +53,10 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
     notToShort: (value: Comment) => isNotShort(value.comment),
   };
 
+  type validationRulesKeys = keyof typeof validationRules;
+
   const isValid = Object.keys(validationRules).every((rule) =>
-    validationRules[rule as keyof typeof validationRules](formData)
+    validationRules[rule as validationRulesKeys](formData)
   );
 
   const ratingArray = Array.from({ length: 10 }, (_, index) => 10 - index);

@@ -1,21 +1,21 @@
 import { formatTime } from '@/utils/const';
 
-type PlayerControlTimeLineType = {
+type PlayerControlTimeLineProps = {
   currentTime: number;
   duration: number;
-  handleToggler: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onTogglerDown: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export default function PlayerControlTimeLine({
   currentTime,
   duration,
-  handleToggler,
-}: PlayerControlTimeLineType) {
+  onTogglerDown,
+}: PlayerControlTimeLineProps) {
   return (
     <div className="player__controls-row">
       <div
         className="player__time"
-        onMouseDown={(event) => handleToggler(event)}
+        onMouseDown={(event) => onTogglerDown(event)}
       >
         <progress
           className="player__progress"
@@ -23,7 +23,7 @@ export default function PlayerControlTimeLine({
           max={1}
         />
         <div
-          onMouseDown={handleToggler}
+          onMouseDown={onTogglerDown}
           className="player__toggler"
           style={{ left: `${(currentTime / duration) * 100}%` }}
         >

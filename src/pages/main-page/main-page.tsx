@@ -3,7 +3,6 @@ import FooterLogo from '@/components/footer-logo/footer-logo';
 import FilmsCatalog from '@/components/films-catalog/films-catalog';
 import { useEffect } from 'react';
 import {
-  resetFilmAction,
   resetGenreAction,
 } from '@/store/films-slice/films-slice';
 import {
@@ -15,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import LoadingSpinner from '@/components/loading-spinner/loading-spinner';
 import {
   checkLoginAction,
+  fetchFavoriteFilms,
   fetchFilmsAction,
   fetchPromoFilm,
 } from '@/store/api-actions';
@@ -33,7 +33,7 @@ export default function MainPage(): JSX.Element {
     dispatch(checkLoginAction());
     dispatch(fetchPromoFilm());
     dispatch(fetchFilmsAction());
-    dispatch(resetFilmAction());
+    dispatch(fetchFavoriteFilms());
   }, [dispatch]);
 
   if (filmsStatus.isLoading || promoFilmStatus.isLoading) {

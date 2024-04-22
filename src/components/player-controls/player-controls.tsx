@@ -3,38 +3,38 @@ import PlayerFullScreenButton from '../player-full-screen-button/player-full-scr
 import PlayerPlayPauseButton from '../player-play-pause-button/player-play-pause-button';
 
 type PlayerControlProps = {
-  handleToggler: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onTogglerDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   currentTime: number;
   duration: number;
   filmName: string;
   isPlaying: boolean;
-  handleFullScreen: () => void;
-  handlePlayPauseClick: () => void;
+  onFullScreenClick: () => void;
+  onPlayPauseClick: () => void;
 };
 
 export default function PlayerControls({
-  handleToggler,
+  onTogglerDown,
   currentTime,
   duration,
   isPlaying,
-  handleFullScreen,
+  onFullScreenClick,
   filmName,
-  handlePlayPauseClick,
+  onPlayPauseClick,
 }: PlayerControlProps) {
   return (
     <div className="player__controls">
       <PlayerControlTimeLine
         duration={duration}
         currentTime={currentTime}
-        handleToggler={handleToggler}
+        onTogglerDown={onTogglerDown}
       />
       <div className="player__controls-row">
         <PlayerPlayPauseButton
-          handleClick={handlePlayPauseClick}
+          onPlayPauseClick={onPlayPauseClick}
           isPlaying={isPlaying}
         />
         <div className="player__name">{filmName}</div>
-        <PlayerFullScreenButton handleClick={handleFullScreen} />
+        <PlayerFullScreenButton onFullScreenClick={onFullScreenClick} />
       </div>
     </div>
   );

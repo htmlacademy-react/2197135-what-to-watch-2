@@ -47,7 +47,7 @@ export enum NameSpace {
 
 export enum FilmStatus {
   Favorite = 1,
-  NotFavforite = 0
+  NotFavforite = 0,
 }
 
 export const ALL_GENRES = 'All Genres';
@@ -67,7 +67,7 @@ export const formatTime = (timeInSeconds: number): string => {
 
   if (hours > 0) {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-  } else {
-    return `${formattedMinutes}:${formattedSeconds}`;
   }
+
+  return `${formattedMinutes}:${formattedSeconds}`;
 };

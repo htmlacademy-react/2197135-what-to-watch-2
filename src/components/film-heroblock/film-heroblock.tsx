@@ -29,7 +29,7 @@ export default function FilmHeroBlock({
             <span className="film-card__genre">{film.genre}</span>
             <span className="film-card__year">{film.released}</span>
           </p>
-          <UserControlButtons id={film.id} isFavorite={film.isFavorite} />
+          <UserControlButtons id={film.id} />
         </div>
       </div>
     </>
