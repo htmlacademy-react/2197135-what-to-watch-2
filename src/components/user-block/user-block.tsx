@@ -2,18 +2,22 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import { LoginStatus } from '@/utils/const';
 import { AppRoute } from '@/utils/const';
 import { logoutAction } from '@/store/api-actions';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
 
 export default function UserBlock() {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
+  const navigate = useNavigate();
 
   return (
     <ul className="user-block">
       {authStatus === LoginStatus.Auth && (
         <li className="user-block__item">
-          <div className="user-block__avatar">
+          <div
+            onClick={() => navigate(AppRoute.MyList)}
+            className="user-block__avatar"
+          >
             <img
               src="img/avatar.jpg"
               alt="User avatar"

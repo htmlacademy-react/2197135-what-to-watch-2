@@ -14,7 +14,7 @@ import {
   resetShownFilmsAction,
 } from '@/store/films-slice/films-slice';
 
-export default function FilmsCatalog() {
+export default function FilmsCatalog(): JSX.Element {
   const activeGenre = useAppSelector(getActiveGenre);
   const films = useAppSelector(getFilms);
   const filmsShown = useAppSelector(getFilmsShown);

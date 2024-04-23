@@ -12,7 +12,6 @@ export default function FilmHeroBlock({
   film,
   className,
 }: FilmHeroblockProps): JSX.Element {
-
   return (
     <>
       <div className="film-card__bg">

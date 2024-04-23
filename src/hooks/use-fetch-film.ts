@@ -5,11 +5,6 @@ import {
   fetchFilmReviews,
   fetchSimilarFilms,
 } from '@/store/api-actions';
-import { resetReviewsAction } from '@/store/reviews-slice/film-reviews-slice';
-import {
-  resetFilmAction,
-  resetSimilarFilms,
-} from '@/store/films-slice/films-slice';
 
 export const useFetchFilm = (id: string | undefined) => {
   const dispatch = useAppDispatch();
@@ -20,10 +15,5 @@ export const useFetchFilm = (id: string | undefined) => {
       dispatch(fetchFilmReviews(id));
       dispatch(fetchSimilarFilms(id));
     }
-    return () => {
-      dispatch(resetFilmAction());
-      dispatch(resetReviewsAction());
-      dispatch(resetSimilarFilms());
-    };
   }, [id, dispatch]);
 };
