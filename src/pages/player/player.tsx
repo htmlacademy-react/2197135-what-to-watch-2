@@ -34,6 +34,8 @@ export default function Player(): JSX.Element {
 
       const handleLoadedMetaData = () => {
         setDuration(videoElement.duration);
+        setIsPlaying(true);
+        videoElement.play();
       };
 
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
@@ -71,12 +73,13 @@ export default function Player(): JSX.Element {
 
   const handlePlayPauseClick = () => {
     if (videoRef.current) {
-      setIsPlaying((prevState) => !prevState);
       if (isPlaying) {
         videoRef.current.pause();
+        setIsPlaying(false);
       } else {
         videoRef.current.currentTime = currentTime;
         videoRef.current.play();
+        setIsPlaying(true);
       }
     }
   };
@@ -133,6 +136,7 @@ export default function Player(): JSX.Element {
           src={chosenFilm.videoLink}
           className="player__video"
           poster={chosenFilm.posterImage}
+          autoPlay={isPlaying}
         />
         <button
           onClick={handleExitClick}

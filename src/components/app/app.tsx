@@ -14,8 +14,24 @@ import { AppRoute } from '@/utils/const';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '@/services/browser-history';
 import ErrorPage from '@/pages/error-page/error-page';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { checkLoginAction } from '@/store/api-actions';
+import { useEffect } from 'react';
+import { getLoginStatusSelector } from '@/store/user-slice/user-slice-selectors';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 export default function App() {
+  const dispatch = useAppDispatch();
+  const loginStatus = useAppSelector(getLoginStatusSelector);
+
+  useEffect(() => {
+    dispatch(checkLoginAction());
+  }, [dispatch]);
+
+  if (loginStatus.isLoading) {
+    <LoadingSpinner />;
+  }
+
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>

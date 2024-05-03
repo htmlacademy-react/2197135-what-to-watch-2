@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Film } from '@/types/film';
 
 type FilmsFavoriteSlice = {
-  favoriteFilms: Film[] | [];
+  favoriteFilms: Film[];
   favoriteFilmsStatus: FetchStatus;
   toggleFavoriteStatus: FetchStatus;
 };
@@ -28,7 +28,7 @@ export const FilmsFavoriteSlice = createSlice({
         state.favoriteFilmsStatus = FetchStatus.Pending;
       })
       .addCase(fetchFavoriteFilms.fulfilled, (state, action) => {
-        state.favoriteFilmsStatus = FetchStatus.Pending;
+        state.favoriteFilmsStatus = FetchStatus.Success;
         state.favoriteFilms = action.payload;
       })
       .addCase(toggleFilmFavoriteAction.rejected, (state) => {
@@ -37,8 +37,15 @@ export const FilmsFavoriteSlice = createSlice({
       .addCase(toggleFilmFavoriteAction.pending, (state) => {
         state.toggleFavoriteStatus = FetchStatus.Pending;
       })
-      .addCase(toggleFilmFavoriteAction.fulfilled, (state) => {
+      .addCase(toggleFilmFavoriteAction.fulfilled, (state, action) => {
         state.toggleFavoriteStatus = FetchStatus.Success;
+        if (action.payload.isFavorite) {
+          state.favoriteFilms.push(action.payload);
+        } else {
+          state.favoriteFilms = state.favoriteFilms.filter(
+            (item) => action.payload.id !== item.id
+          );
+        }
       });
   },
 });
