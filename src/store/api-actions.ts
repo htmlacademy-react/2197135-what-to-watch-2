@@ -130,20 +130,22 @@ export const fetchFavoriteFilms = createAsyncThunk<
 });
 
 export const toggleFilmFavoriteAction = createAsyncThunk<
-  void,
+  Film,
   { id: Film['id']; favoriteStatus: FilmStatus },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >(
-  'data/addFavoriteFilm',
+  'data/toggleFavoriteFilm',
   async ({ id, favoriteStatus }, { dispatch, extra: api }) => {
     try {
-      await api.post(`${APIRoute.Favorite}/${id}/${favoriteStatus}`);
-      dispatch(fetchFavoriteFilms());
+      const { data } = await api.post<Film>(
+        `${APIRoute.Favorite}/${id}/${favoriteStatus}`
+      );
+      return data;
     } catch (err) {
       dispatch(
         pushNotification({
           type: 'error',
-          message: 'Something went wrong when adding / removing favorite film',
+          message: 'Something went wrong during film status changing',
         })
       );
       throw err;
@@ -183,7 +185,7 @@ export const postUserCommentAction = createAsyncThunk<
 });
 
 export const checkLoginAction = createAsyncThunk<
-  void,
+  string,
   undefined,
   {
     dispatch: AppDispatch;
@@ -192,7 +194,11 @@ export const checkLoginAction = createAsyncThunk<
   }
 >('user/checkLogin', async (_arg, { dispatch, extra: api }) => {
   try {
-    await api.get(APIRoute.Login);
+    const {
+      data: { avatarUrl },
+    } = await api.get<UserData>(APIRoute.Login);
+    dispatch(fetchFavoriteFilms());
+    return avatarUrl;
   } catch (err) {
     dispatch(
       pushNotification({
@@ -205,7 +211,7 @@ export const checkLoginAction = createAsyncThunk<
 });
 
 export const loginAction = createAsyncThunk<
-  void,
+  string,
   LoginData,
   {
     dispatch: AppDispatch;
@@ -215,10 +221,12 @@ export const loginAction = createAsyncThunk<
 >('user/login', async ({ email, password }, { dispatch, extra: api }) => {
   try {
     const {
-      data: { token },
+      data: { token, avatarUrl },
     } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
     dispatch(redirectToRouteAction(AppRoute.Main));
+    dispatch(fetchFavoriteFilms());
+    return avatarUrl;
   } catch (err) {
     dispatch(
       pushNotification({

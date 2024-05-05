@@ -3,12 +3,17 @@ import { LoginStatus } from '@/utils/const';
 import { AppRoute } from '@/utils/const';
 import { logoutAction } from '@/store/api-actions';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuthStatus } from '@/store/user-slice/user-slice-selectors';
+import {
+  getAuthStatus,
+  getUserAvatar,
+} from '@/store/user-slice/user-slice-selectors';
 
 export default function UserBlock() {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
   const navigate = useNavigate();
+
+  const userAvatar = useAppSelector(getUserAvatar);
 
   return (
     <ul className="user-block">
@@ -18,12 +23,7 @@ export default function UserBlock() {
             onClick={() => navigate(AppRoute.MyList)}
             className="user-block__avatar"
           >
-            <img
-              src="img/avatar.jpg"
-              alt="User avatar"
-              width="63"
-              height="63"
-            />
+            <img src={userAvatar} alt="User avatar" width="63" height="63" />
           </div>
         </li>
       )}
