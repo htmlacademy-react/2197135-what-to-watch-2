@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import FooterLogo from '@/components/footer-logo/footer-logo';
 import FilmsCatalog from '@/components/films-catalog/films-catalog';
 import { useEffect } from 'react';
 import { resetGenreAction } from '@/store/films-slice/films-slice';
@@ -13,6 +12,7 @@ import LoadingSpinner from '@/components/loading-spinner/loading-spinner';
 import { fetchFilmsAction, fetchPromoFilm } from '@/store/api-actions';
 import ErrorPage from '../error-page/error-page';
 import PromoHeroBlock from '@/components/promo-heroblock/promo-heroblock';
+import Footer from '@/components/footer/footer';
 
 export default function MainPage(): JSX.Element {
   const filmsStatus = useAppSelector(getFilmsStatusSelector);
@@ -45,12 +45,7 @@ export default function MainPage(): JSX.Element {
       </section>
       <div className="page-content">
         <FilmsCatalog />
-        <footer className="page-footer">
-          <FooterLogo />
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

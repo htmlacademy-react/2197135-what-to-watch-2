@@ -200,13 +200,7 @@ export const checkLoginAction = createAsyncThunk<
     dispatch(fetchFavoriteFilms());
     return avatarUrl;
   } catch (err) {
-    dispatch(
-      pushNotification({
-        type: 'warning',
-        message: 'Cannot check authorization status',
-      })
-    );
-    throw err;
+    throw new Error('cannot check authorization status');
   }
 });
 

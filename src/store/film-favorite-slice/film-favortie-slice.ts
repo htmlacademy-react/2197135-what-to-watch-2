@@ -15,7 +15,7 @@ const initialState: FilmsFavoriteSlice = {
   toggleFavoriteStatus: FetchStatus.Idle,
 };
 
-export const FilmsFavoriteSlice = createSlice({
+export const filmsFavoriteSlice = createSlice({
   name: NameSpace.Favorite,
   initialState,
   reducers: {},
