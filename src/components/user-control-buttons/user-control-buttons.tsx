@@ -10,10 +10,12 @@ import { Link, generatePath, useNavigate } from 'react-router-dom';
 
 type UserControlButtonsProps = {
   id: string;
+  isPromo?: boolean;
 };
 
 export function UserControlButtons({
   id,
+  isPromo,
 }: UserControlButtonsProps): JSX.Element {
   const navigate = useNavigate();
   const authStatus = useAppSelector(getAuthStatus);
@@ -68,14 +70,14 @@ export function UserControlButtons({
         <span>My list</span>
         <span className="film-card__count">{favoriteFilms.length}</span>
       </button>
-      {authStatus === LoginStatus.Auth && (
+      {authStatus === LoginStatus.Auth && !isPromo ? (
         <Link
           to={generatePath(AppRoute.AddReview, { id })}
           className="btn film-card__button"
         >
           Add review
         </Link>
-      )}
+      ) : null}
     </div>
   );
 }

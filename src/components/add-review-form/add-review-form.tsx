@@ -12,6 +12,8 @@ const COMMENT_LENGTH = {
   max: 400,
 } as const;
 
+const RATING_NUMBER = 10;
+
 const notValidMessage = {
   empty: 'Comment cannot be empty bro, sorry :(',
   commentShort: 'Be awesome. Write something more than 50 characters :)',
@@ -59,7 +61,10 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
     validationRules[rule as validationRulesKeys](formData)
   );
 
-  const ratingArray = Array.from({ length: 10 }, (_, index) => 10 - index);
+  const ratingArray = Array.from(
+    { length: RATING_NUMBER },
+    (_, index) => RATING_NUMBER - index
+  );
 
   function handleInputChange(
     evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -67,7 +72,7 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
     const { name, value } = evt.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: name === 'rating' ? parseInt(value, 10) : value,
+      [name]: name === 'rating' ? parseInt(value, RATING_NUMBER) : value,
     }));
   }
 
@@ -136,11 +141,6 @@ export default function AddReviewForm({ id }: AddReviewFormProps): JSX.Element {
       {!isNotShort(formData.comment) && (
         <p className={classes.validationMessage}>
           {notValidMessage.commentShort}
-        </p>
-      )}
-      {!isNotTooLong(formData.comment) && (
-        <p className={classes.validationMessage}>
-          {notValidMessage.commentLong}
         </p>
       )}
       {!isNotTooLong(formData.comment) && (

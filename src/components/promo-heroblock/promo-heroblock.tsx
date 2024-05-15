@@ -38,7 +38,7 @@ export default function PromoHeroBlock({
               <span className="film-card__genre">{film.genre}</span>
               <span className="film-card__year">{film.released}</span>
             </p>
-            <UserControlButtons id={film.id} />
+            <UserControlButtons id={film.id} isPromo />
           </div>
         </div>
       </div>

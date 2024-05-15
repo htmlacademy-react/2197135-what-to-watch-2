@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { AppRoute } from '@/utils/const';
 import { useAppSelector } from '@/hooks';
 import {
   getFilm,
@@ -85,7 +84,7 @@ export default function Player(): JSX.Element {
   };
 
   const handleExitClick = () => {
-    navigate(AppRoute.Main);
+    navigate(-1);
   };
 
   const handleTogglerMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
